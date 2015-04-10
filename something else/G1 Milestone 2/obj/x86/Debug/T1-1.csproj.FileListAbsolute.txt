@@ -1,0 +1,121 @@
+C:\Users\Angie\Desktop\T1-1\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Angie\Desktop\T1-1\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Angie\Desktop\T1-1\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Angie\Desktop\T1-1\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Angie\Desktop\T1-1\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Angie\Desktop\T1-1\obj\x86\Debug\T1-1.csprojResolveAssemblyReference.cache
+C:\Users\Angie\Desktop\T1-1\obj\x86\Debug\T1-1.exe
+C:\Users\Angie\Desktop\T1-1\obj\x86\Debug\T1-1.pdb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\obj\x86\Debug\T1-1.exe
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\obj\x86\Debug\T1-1.pdb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\obj\x86\Debug\T1-1.csprojResolveAssemblyReference.cache
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\T1-1.exe
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\T1-1.pdb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Content\sprShip.xnb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Content\StartButton.xnb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Content\menuStart.xnb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Content\menuFont.sfb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Content\menuPause.xnb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Content\menuGameOver.xnb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Content\backgroundScroll.xnb
+C:\Users\Angie\Documents\Visual Studio 2013\Projects\T1-1\bin\WindowsGL\Debug\Content\sprShip1.xnb
+D:\Users\Akw7657\Desktop\T1-1_Davern\obj\x86\Debug\T1-1.exe
+D:\Users\Akw7657\Desktop\T1-1_Davern\obj\x86\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\T1-1_Davern\obj\x86\Debug\T1-1.csprojResolveAssemblyReference.cache
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Content\sprShip.xnb
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Content\StartButton.xnb
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Content\menuFont.sfb
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Content\menuStart.xnb
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Content\menuPause.xnb
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Content\menuGameOver.xnb
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Content\backgroundScroll.xnb
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Content\sprShip1.xnb
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\T1-1.exe
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Lidgren.Network.dll
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\MonoGame.Framework.dll
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\OpenTK.dll
+D:\Users\Akw7657\Desktop\T1-1_Davern\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Content\sprShip.xnb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Content\StartButton.xnb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuFont.sfb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuStart.xnb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuPause.xnb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuGameOver.xnb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Content\backgroundScroll.xnb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Content\sprShip1.xnb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\T1-1.exe
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\T1-1.pdb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Mystic\Desktop\G1 Milestone 2\obj\x86\Debug\T1-1.csprojResolveAssemblyReference.cache
+C:\Users\Mystic\Desktop\G1 Milestone 2\obj\x86\Debug\T1-1.exe
+C:\Users\Mystic\Desktop\G1 Milestone 2\obj\x86\Debug\T1-1.pdb
+C:\Users\Mystic\Desktop\G1 Milestone 2\bin\WindowsGL\Debug\Content\enemy01.xnb
+D:\Users\Miguel\Downloads\G1 Milestone 2\G1 Milestone 2\obj\x86\Debug\T1-1.exe
+D:\Users\Miguel\Downloads\G1 Milestone 2\G1 Milestone 2\obj\x86\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\obj\x86\Debug\T1-1.exe
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\obj\x86\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Content\sprShip.xnb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Content\StartButton.xnb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuFont.sfb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuStart.xnb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuPause.xnb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuGameOver.xnb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Content\backgroundScroll.xnb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Content\sprShip1.xnb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Content\enemy01.xnb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\T1-1.exe
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Lidgren.Network.dll
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\MonoGame.Framework.dll
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\OpenTK.dll
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\bin\WindowsGL\Debug\Tao.Sdl.dll
+D:\Users\Akw7657\Desktop\G1 Milestone 2\G1 Milestone 2\obj\x86\Debug\T1-1.csprojResolveAssemblyReference.cache
+D:\Users\Akw7657\Desktop\G1 Milestone 2 (1)\G1 Milestone 2\obj\x86\Debug\T1-1.exe
+D:\Users\Akw7657\Desktop\G1 Milestone 2 (1)\G1 Milestone 2\obj\x86\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\obj\x86\Debug\T1-1.exe
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\obj\x86\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Content\sprShip.xnb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Content\StartButton.xnb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuFont.sfb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuStart.xnb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuPause.xnb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuGameOver.xnb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Content\backgroundScroll.xnb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Content\sprShip1.xnb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Content\enemy01.xnb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\T1-1.exe
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Lidgren.Network.dll
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\MonoGame.Framework.dll
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\OpenTK.dll
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\bin\WindowsGL\Debug\Tao.Sdl.dll
+D:\Users\Akw7657\Desktop\New folder\G1 Milestone 2\obj\x86\Debug\T1-1.csprojResolveAssemblyReference.cache
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\obj\x86\Debug\T1-1.exe
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\obj\x86\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\sprShip.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\StartButton.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuFont.sfb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuStart.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuPause.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\menuGameOver.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\backgroundScroll.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\sprShip1.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\enemy01.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\T1-1.exe
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\T1-1.pdb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Lidgren.Network.dll
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\MonoGame.Framework.dll
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\OpenTK.dll
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Tao.Sdl.dll
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\obj\x86\Debug\T1-1.csprojResolveAssemblyReference.cache
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\bulleta.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\bullete.xnb
+D:\Users\Akw7657\Desktop\something else\G1 Milestone 2\bin\WindowsGL\Debug\Content\sprShip2.xnb
