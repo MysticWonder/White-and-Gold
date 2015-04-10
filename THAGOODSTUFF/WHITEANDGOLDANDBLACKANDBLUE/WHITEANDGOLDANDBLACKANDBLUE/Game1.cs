@@ -1,0 +1,435 @@
+﻿#region Using Statements
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Storage;
+//using Microsoft.Xna.Framework.GamerServices;
+#endregion
+
+namespace WHITEANDGOLDANDBLACKANDBLUE
+{
+    /// <summary>
+    /// This is the main type for your game
+    /// </summary>
+    public class Game1 : Game
+    {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+        Texture2D ship;
+        SpriteFont menuFont;
+        KeyboardState keystate;
+        MouseState mousestate;
+        Ship s1;
+        int KeyDirection = 0; // 1 up, 2 right, 3 down 4 left
+        // game menu
+        Menu menu;
+        // menu and background textures
+        Texture2D titlescreen;
+        Texture2D pausescreen;
+        Texture2D gameoverscreen;
+        Texture2D background;
+        // rectangles for background graphics
+        Rectangle backRect1;
+        Rectangle backRect2;
+
+        // bullet attributes
+        Bullet[] BulletsAr = new Bullet[200];
+        int bulletcounter = 0;
+        int testcounter = 0;
+        int BulletBuffer = 0;
+        Texture2D BulletE;
+        Texture2D BulletA;
+
+        // enemy attributes
+        //random # generator
+        Random RNG = new Random();
+        Texture2D enemy01;
+        //list of enemies
+        List<Enemy> enemies = new List<Enemy>();
+
+        // -------------------------------------------------------------------------------------------------------------------------------
+        // Variables for collisions
+        Player p1 = new Player("P1");
+        // -------------------------------------------------------------------------------------------------------------------------------
+
+        public Game1()
+            : base()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+        }
+
+        /// <summary>
+        /// Allows the game to perform any initialization it needs to before starting to run.
+        /// This is where it can query for any required services and load any non-graphic
+        /// related content.  Calling base.Initialize will enumerate through any components
+        /// and initialize them as well.
+        /// </summary>
+        protected override void Initialize()
+        {
+            // TODO: Add your initialization logic here
+
+
+            // initialize a TitleMenu object
+            menu = new TitleMenu();
+
+
+            ship = Content.Load<Texture2D>("sprShip1");
+
+            // initialize background rectangles
+            backRect1 = new Rectangle(0, 0, 800, 600);
+            backRect2 = new Rectangle(0, 600, 800, 600);
+
+            // initialize players and ships
+            s1 = new Ship(50, 50, ship);
+
+
+            //initialize some enemies(just 5 for testing)
+            /*enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));
+            enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));
+            enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));
+            enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));
+            enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));*/
+
+            base.Initialize();
+        }
+
+        /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            titlescreen = Content.Load<Texture2D>("menuStart");
+            pausescreen = Content.Load<Texture2D>("menuPause");
+            gameoverscreen = Content.Load<Texture2D>("menuGameOver");
+            background = Content.Load<Texture2D>("backgroundScroll");
+
+            BulletA = Content.Load<Texture2D>("bulleta");
+            BulletE = Content.Load<Texture2D>("bullete");
+
+            enemy01 = Content.Load<Texture2D>("enemy01");
+
+
+            // TODO: use this.Content to load your game content here
+        }
+
+        /// <summary>
+        /// UnloadContent will be called once per game and is the place to unload
+        /// all content.
+        /// </summary>
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
+        }
+
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
+            // TODO: Add your update logic here
+
+            //check input to determine the change in screens
+            menu.ProcessInput();
+
+            //if the screen is the game, allow ship to move on screen
+            if (menu.Type == "Game")
+            {
+                this.IsMouseVisible = false;
+
+                // get keystate
+                keystate = Keyboard.GetState();
+                mousestate = Mouse.GetState();
+
+
+                // process movement
+                if (keystate.IsKeyDown(Keys.A))
+                {
+                    KeyDirection = 4;
+                    s1.Move(KeyDirection);
+
+                }
+                if (keystate.IsKeyDown(Keys.D))
+                {
+                    KeyDirection = 2;
+                    s1.Move(KeyDirection);
+                }
+                if (keystate.IsKeyDown(Keys.W))
+                {
+                    KeyDirection = 1;
+                    s1.Move(KeyDirection);
+                }
+                if (keystate.IsKeyDown(Keys.S))
+                {
+                    KeyDirection = 3;
+                    s1.Move(KeyDirection);
+                }
+                // process fire
+                if (mousestate.LeftButton == ButtonState.Pressed)
+                {
+                    // If the bullet buffer is 0 then create a bullet
+                    // Otherwise, you recently shot a bullet so firing should be on cooldown
+                    if (BulletBuffer == 0)
+                    {
+                        BulletBuffer = 20;
+                        AddBullet(1, 0, 0, 0);
+                    }
+                }
+
+                if (mousestate.RightButton == ButtonState.Pressed)
+                {
+                    // If the bullet buffer is 0 then create a bullet
+                    // Otherwise, you recently shot a bullet so firing should be on cooldown
+                    if (BulletBuffer == 0)
+                    {
+                        BulletBuffer = 20;
+                        AddBullet(1, 0, 1, 100);
+                    }
+                }
+
+
+                // -------------------------------------------------------------------------------------------------------------------------------
+                if (keystate.IsKeyDown(Keys.T))
+                {
+                    AddBullet(50, 50, 0, 0, 0, 0);
+                }
+                if (keystate.IsKeyDown(Keys.E))
+                {
+                    if (BulletBuffer == 0)
+                    {
+                        BulletBuffer = 5;
+                        enemies.Add(new Enemy(new Rectangle(300, 50, 50, 50)));
+                    }
+                }
+                // -------------------------------------------------------------------------------------------------------------------------------
+
+                // For every bullet in the BulletsAr array, we need to update thier position (cause they're moving)
+                foreach (Bullet var in BulletsAr)
+                {
+                    if (var != null)
+                    {
+                        var.BulletMove();
+
+                        if (var.BULLETLOCATION.Y < 0)
+                        {
+                            RemoveBullet(var.ID);
+                        }
+                    }
+                }
+
+                // Decrement the BulletBuffer variable so there's a cooldown on how fast you can fire
+                if (BulletBuffer > 0)
+                {
+                    BulletBuffer--;
+                }
+
+
+
+                // check bounds of background rectangles
+                if (backRect1.Y - background.Height >= 0)
+                {
+                    backRect1.Y = backRect2.Y - background.Height;
+                }
+
+                else if (backRect2.Y - background.Height >= 0)
+                {
+                    backRect2.Y = backRect1.Y - background.Height;
+                }
+
+                // scroll the background
+                backRect1.Y += 5;
+                backRect2.Y += 5;
+
+
+                //enemy move
+                foreach (Enemy e in enemies)
+                {
+                    e.Move();
+                }
+
+                //enemy despawn at bottom
+                if (enemies.Count != 0)
+                {
+                    foreach (Enemy e in enemies)
+                    {
+                        if (e.HEALTH <= 0)
+                        {
+                            enemies.Remove(e);
+                            break;
+                        }
+                    }
+                }
+
+                // -------------------------------------------------------------------------------------------------------------------------------
+                // for each bullet, check the collision to see if an enemy is hit or a player is hit
+                foreach (Bullet var in BulletsAr)
+                {
+                    if (var != null)
+                    {
+                        if (var.Alligience == 0)
+                        {
+                            if (var.BULLETLOCATION.Intersects(s1.SHIPLOCATION))
+                            {
+                                RemoveBullet(var.ID);
+                                p1.LoseLife();
+
+                                if (p1.LostGame())
+                                {
+                                    menu.Type = "GameOver";
+                                }
+                            }
+                        }
+
+                        if (var.Alligience == 1)
+                        {
+                            foreach (Enemy evar in enemies)
+                            {
+                                if (var.BULLETLOCATION.Intersects(evar.POSITION))
+                                {
+                                    RemoveBullet(var.ID);
+                                    evar.TakeHit();
+                                }
+                            }
+                        }
+                    }
+                }
+                // -------------------------------------------------------------------------------------------------------------------------------
+
+            }
+
+            // enable mouse visibility on all menus besides the game screen
+            if (menu.Type != "Game")
+            {
+                this.IsMouseVisible = true;
+            }
+
+
+
+
+
+
+            base.Update(gameTime);
+        }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            //determine which menu is drawn on the screen
+            switch (menu.Type)
+            {
+                case "Title":
+                    menu = new TitleMenu();
+                    spriteBatch.Draw(titlescreen, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+                    break;
+                case "Game":
+                    menu = new GameScreen();
+                    // Draw the backgrounds
+                    spriteBatch.Draw(background, backRect1, Color.White);
+                    spriteBatch.Draw(background, backRect2, Color.White);
+
+                    // Draw the ship
+                    spriteBatch.Draw(ship, s1.SHIPLOCATION, Color.White);
+
+                    // For every bullet in the array that actually exists (isn't null), draw it
+                    foreach (Bullet val in BulletsAr)
+                    {
+                        if (val != null)
+                        {
+                            if (val.Alligience == 1)
+                            {
+                                spriteBatch.Draw(BulletA, val.BULLETLOCATION, Color.White);
+                            }
+                            else
+                            {
+                                spriteBatch.Draw(BulletE, val.BULLETLOCATION, Color.White);
+                            }
+                            testcounter++;
+                        }
+                    }
+
+                    //draw enemy01
+                    foreach (Enemy e in enemies)
+                    {
+                        spriteBatch.Draw(enemy01, e.POSITION, Color.White);
+                    }
+
+
+                    break;
+                case "Pause":
+                    menu = new PauseMenu();
+                    spriteBatch.Draw(pausescreen, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+                    break;
+                case "GameOver":
+                    menu = new GameOverScreen();
+                    spriteBatch.Draw(gameoverscreen, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+                    break;
+            }
+
+
+
+
+            spriteBatch.End();
+            base.Draw(gameTime);
+        }
+
+        // Adds the bullet to the array
+        public virtual void AddBullet(int alligence, int color, int style, int fuse)
+        {
+            bulletcounter = 0;
+            while (true)
+            {
+                if (BulletsAr[bulletcounter] == null)
+                {
+
+                    BulletsAr[bulletcounter] = new Bullet(s1.SHIPLOCATION.X + (s1.SHIPLOCATION.Width / 2) - 10, s1.SHIPLOCATION.Y, alligence, bulletcounter, style, fuse, color);
+                    break;
+                }
+                else
+                { bulletcounter++; }
+            }
+        }
+
+        public virtual void AddBullet(int x, int y, int alligience, int color, int style, int fuse)
+        {
+            bulletcounter = 0;
+            while (true)
+            {
+                if (BulletsAr[bulletcounter] == null)
+                {
+
+                    BulletsAr[bulletcounter] = new Bullet(x, y, alligience, bulletcounter, style, fuse, color);
+                    break;
+                }
+                else
+                { bulletcounter++; }
+            }
+        }
+
+        // Removes the bullet with the specific id from the array
+        // This opens up the BulletsAr[id] location to be filled by another slot
+        public void RemoveBullet(int id)
+        {
+            BulletsAr[id] = null;
+        }
+
+    }
+}
