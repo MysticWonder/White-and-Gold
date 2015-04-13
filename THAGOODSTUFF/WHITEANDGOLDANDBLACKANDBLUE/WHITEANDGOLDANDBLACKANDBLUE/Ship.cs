@@ -16,6 +16,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         private Bullet bullet;
         private int Mode = 0; // Default Mode, 1 is other mode
         private Rectangle shiplocation;
+        private KeyboardState prevstate;
+        private KeyboardState currentstate;
 
         // Properties
         public Player PLAYER { get { return player; } }
@@ -52,6 +54,22 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         public void Fire()
         {
 
+        }
+        public void ModeSwitch()
+        {
+            currentstate = Keyboard.GetState();
+            if (Mode == 0 && prevstate.IsKeyDown(Keys.Space) == false && currentstate.IsKeyDown(Keys.Space) == true)
+            {
+                Mode = 1;
+
+            }
+            else if (Mode == 1 && prevstate.IsKeyDown(Keys.Space) == false && currentstate.IsKeyDown(Keys.Space) == true)
+            {
+                Mode = 0;
+
+            }
+
+            prevstate = currentstate;
         }
     }
 }

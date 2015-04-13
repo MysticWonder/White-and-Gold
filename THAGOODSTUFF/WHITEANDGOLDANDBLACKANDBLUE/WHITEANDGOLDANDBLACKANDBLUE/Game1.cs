@@ -18,11 +18,13 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D ship;
+        Texture2D ship1;
+        Texture2D ship2;
         SpriteFont menuFont;
         KeyboardState keystate;
         MouseState mousestate;
         Ship s1;
+        int modebuffer = 0;
         int KeyDirection = 0; // 1 up, 2 right, 3 down 4 left
         // game menu
         Menu menu;
@@ -77,14 +79,15 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             menu = new TitleMenu();
 
 
-            ship = Content.Load<Texture2D>("sprShip1");
+            ship1 = Content.Load<Texture2D>("sprShip1");
+            ship2 = Content.Load<Texture2D>("sprShip2");
 
             // initialize background rectangles
             backRect1 = new Rectangle(0, 0, 800, 600);
             backRect2 = new Rectangle(0, 600, 800, 600);
 
             // initialize players and ships
-            s1 = new Ship(50, 50, ship);
+            s1 = new Ship(50, 50, ship1);
 
 
             //initialize some enemies(just 5 for testing)
@@ -316,7 +319,18 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
 
 
+            // handle mode switching
+            // check for mode switching
+            if (modebuffer == 0)
+            {
+                modebuffer = 5;
+                s1.ModeSwitch();
 
+            }
+            if (modebuffer > 0)
+            {
+                modebuffer--;
+            }
 
 
             base.Update(gameTime);
@@ -347,7 +361,15 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     spriteBatch.Draw(background, backRect2, Color.White);
 
                     // Draw the ship
-                    spriteBatch.Draw(ship, s1.SHIPLOCATION, Color.White);
+                    if (s1.MODE == 0)
+                    {
+                        spriteBatch.Draw(ship1, s1.SHIPLOCATION, Color.White);
+                    }
+                    else if (s1.MODE == 1)
+                    {
+                        spriteBatch.Draw(ship2, s1.SHIPLOCATION, Color.White);
+                    }
+
 
                     // For every bullet in the array that actually exists (isn't null), draw it
                     foreach (Bullet val in BulletsAr)
