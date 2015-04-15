@@ -18,7 +18,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         private Rectangle shiplocation;
         private KeyboardState prevstate;
         private KeyboardState currentstate;
-
+        
         public int X { get; set; }
         public int Y { get; set; }
 
@@ -32,28 +32,28 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             shiplocation = new Rectangle(x, y, image.Width / 5, image.Height / 5);
         }
 
-        public void Move()
+        public void Move(int direction)
         {
-            this.shiplocation.X = WHITEANDGOLDANDBLACKANDBLUE.Game1.mouseLocX;
-            this.shiplocation.Y = WHITEANDGOLDANDBLACKANDBLUE.Game1.mouseLocY;
-            //switch (direction)
-            //{
-            //    case 0:
-            //        // do nothing
-            //        break;
-            //    case 1:
-            //        if ((shiplocation.Y - 3) > 0) { shiplocation.Y = shiplocation.Y - 3; }
-            //        break;
-            //    case 2:
-            //        if ((shiplocation.X + 3) < 750) { shiplocation.X = shiplocation.X + 3; }
-            //        break;
-            //    case 3:
-            //        if ((shiplocation.Y + 3) < 430) { shiplocation.Y = shiplocation.Y + 3; }
-            //        break;
-            //    case 4:
-            //        if ((shiplocation.X - 3) > 0) { shiplocation.X = shiplocation.X - 3; }
-            //        break;
-            //}
+           // this.shiplocation.X = WHITEANDGOLDANDBLACKANDBLUE.Game1.mouseLocX;
+           // this.shiplocation.Y = WHITEANDGOLDANDBLACKANDBLUE.Game1.mouseLocY;
+            switch (direction)
+            {
+                case 0:
+                    // do nothing
+                    break;
+                case 1:
+                    if ((shiplocation.Y - 3) > 0) { shiplocation.Y = shiplocation.Y - 3; }
+                    break;
+                case 2:
+                    if ((shiplocation.X + 3) < 750) { shiplocation.X = shiplocation.X + 3; }
+                    break;
+                case 3:
+                    if ((shiplocation.Y + 3) < 430) { shiplocation.Y = shiplocation.Y + 3; }
+                    break;
+                case 4:
+                    if ((shiplocation.X - 3) > 0) { shiplocation.X = shiplocation.X - 3; }
+                    break;
+            }
 
         }
 

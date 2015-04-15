@@ -91,13 +91,6 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             s1 = new Ship(50, 50, ship1);
 
 
-            //initialize some enemies(just 5 for testing)
-            /*enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));
-            enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));
-            enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));
-            enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));
-            enemies.Add(new Enemy(new Vector2(RNG.Next(0, GraphicsDevice.Viewport.Bounds.Width), 0)));*/
-
             base.Initialize();
         }
 
@@ -113,10 +106,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             pausescreen = Content.Load<Texture2D>("menuPause");
             gameoverscreen = Content.Load<Texture2D>("menuGameOver");
             background = Content.Load<Texture2D>("backgroundScroll");
-
             BulletA = Content.Load<Texture2D>("bulleta");
             BulletE = Content.Load<Texture2D>("bullete");
-
             enemy01 = Content.Load<Texture2D>("enemy01");
 
 
@@ -144,8 +135,39 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
             // TODO: Add your update logic here
 
+            //---------------------------------------------------------------------------------------------------------------------------
+            //-----------------------------------------------------Draw BG Methods-------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------------------------
+
             //check input to determine the change in screens
             menu.ProcessInput();
+
+            // enable mouse visibility on all menus besides the game screen
+            if (menu.Type != "Game")
+            {
+                this.IsMouseVisible = true;
+            }
+
+            // check bounds of background rectangles
+            if (backRect1.Y - background.Height >= 0)
+            {
+                backRect1.Y = backRect2.Y - background.Height;
+            }
+
+            else if (backRect2.Y - background.Height >= 0)
+            {
+                backRect2.Y = backRect1.Y - background.Height;
+            }
+
+            // scroll the background
+            backRect1.Y += 5;
+            backRect2.Y += 5;
+
+
+
+            //---------------------------------------------------------------------------------------------------------------------------
+            //-----------------------------------------------------Input Methods---------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------------------------
 
             //if the screen is the game, allow ship to move on screen
             if (menu.Type == "Game")
@@ -157,30 +179,30 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 mousestate = Mouse.GetState();
                 mouseLocX = mousestate.X;
                 mouseLocY = mousestate.Y;
-                s1.Move();
+                //s1.Move();
 
                 //// process movement
-                //if (keystate.IsKeyDown(Keys.A))
-                //{
-                //    KeyDirection = 4;
-                //    s1.Move(KeyDirection);
+                if (keystate.IsKeyDown(Keys.A))
+                {
+                    KeyDirection = 4;
+                    s1.Move(KeyDirection);
 
-                //}
-                //if (keystate.IsKeyDown(Keys.D))
-                //{
-                //    KeyDirection = 2;
-                //    s1.Move(KeyDirection);
-                //}
-                //if (keystate.IsKeyDown(Keys.W))
-                //{
-                //    KeyDirection = 1;
-                //    s1.Move(KeyDirection);
-                //}
-                //if (keystate.IsKeyDown(Keys.S))
-                //{
-                //    KeyDirection = 3;
-                //    s1.Move(KeyDirection);
-                //}
+                }
+                if (keystate.IsKeyDown(Keys.D))
+                {
+                    KeyDirection = 2;
+                    s1.Move(KeyDirection);
+                }
+                if (keystate.IsKeyDown(Keys.W))
+                {
+                    KeyDirection = 1;
+                    s1.Move(KeyDirection);
+                }
+                if (keystate.IsKeyDown(Keys.S))
+                {
+                    KeyDirection = 3;
+                    s1.Move(KeyDirection);
+                }
 
                 
                 // process fire
@@ -206,8 +228,6 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     }
                 }
 
-
-                // -------------------------------------------------------------------------------------------------------------------------------
                 if (keystate.IsKeyDown(Keys.T))
                 {
                     AddBullet(50, 50, 0, 0, 0, 0);
@@ -220,7 +240,12 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         enemies.Add(new Enemy(new Rectangle(300, 50, 50, 50)));
                     }
                 }
-                // -------------------------------------------------------------------------------------------------------------------------------
+
+
+
+                //---------------------------------------------------------------------------------------------------------------------------
+                //--------------------------------------------------Movement Methods---------------------------------------------------------
+                //---------------------------------------------------------------------------------------------------------------------------
 
                 // For every bullet in the BulletsAr array, we need to update thier position (cause they're moving)
                 foreach (Bullet var in BulletsAr)
@@ -236,35 +261,12 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     }
                 }
 
-                // Decrement the BulletBuffer variable so there's a cooldown on how fast you can fire
-                if (BulletBuffer > 0)
-                {
-                    BulletBuffer--;
-                }
-
-
-
-                // check bounds of background rectangles
-                if (backRect1.Y - background.Height >= 0)
-                {
-                    backRect1.Y = backRect2.Y - background.Height;
-                }
-
-                else if (backRect2.Y - background.Height >= 0)
-                {
-                    backRect2.Y = backRect1.Y - background.Height;
-                }
-
-                // scroll the background
-                backRect1.Y += 5;
-                backRect2.Y += 5;
-
-
                 //enemy move
                 foreach (Enemy e in enemies)
                 {
                     e.Move();
                 }
+               
 
                 //enemy despawn at bottom
                 if (enemies.Count != 0)
@@ -279,7 +281,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     }
                 }
 
-                // -------------------------------------------------------------------------------------------------------------------------------
+                //---------------------------------------------------------------------------------------------------------------------------
+                //--------------------------------------------------Collision Methods--------------------------------------------------------
+                //---------------------------------------------------------------------------------------------------------------------------
+
+
                 // for each bullet, check the collision to see if an enemy is hit or a player is hit
                 foreach (Bullet var in BulletsAr)
                 {
@@ -312,17 +318,20 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         }
                     }
                 }
-                // -------------------------------------------------------------------------------------------------------------------------------
+               
 
             }
 
-            // enable mouse visibility on all menus besides the game screen
-            if (menu.Type != "Game")
+            //---------------------------------------------------------------------------------------------------------------------------
+            //----------------------------------------------------Buffer Methods---------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------------------------
+
+
+            // Decrement the BulletBuffer variable so there's a cooldown on how fast you can fire
+            if (BulletBuffer > 0)
             {
-                this.IsMouseVisible = true;
+                BulletBuffer--;
             }
-
-
 
             // handle mode switching
             // check for mode switching
@@ -340,6 +349,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
             base.Update(gameTime);
         }
+
+//---------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------END UPDATE METHOD--------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
+
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -417,6 +431,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             spriteBatch.End();
             base.Draw(gameTime);
         }
+
+//---------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------Bullet Methods---------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
 
         // Adds the bullet to the array
         public virtual void AddBullet(int alligence, int color, int style, int fuse)

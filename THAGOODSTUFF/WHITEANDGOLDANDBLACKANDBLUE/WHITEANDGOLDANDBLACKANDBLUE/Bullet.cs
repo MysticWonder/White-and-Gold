@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WHITEANDGOLDANDBLACKANDBLUE
 {
-    public class Bullet
+    class Bullet : Game1
     {
         private int PorE; // 0 is enemy, 1 is player
         private int xpos;
@@ -19,6 +19,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         private int bulstyle;
         private Game1 g1 = new Game1();
         private int color;
+        SpriteBatch Spritebatch;
+        Texture2D boomboom;
 
 
         public Rectangle BULLETLOCATION { get { return imagelocation; } }
@@ -57,26 +59,25 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             {
                 if (PorE == 1)
                 {
-                    imagelocation.Y -= 2;
+                    if (fuse > 50)
+                    {
+                        imagelocation.Y -= 2;
+                    }
+                    else
+                    {
+                        imagelocation.X -= 2;
+                    }
+
                     fuse--;
+
                     if (fuse <= 0)
                     {
-                        //g1.AddBullet(1, 2, 50);
-
+                        
                         imagelocation.Y = -10;
                     }
                 }
             }
-            /*if (bulstyle == 2)
-            {
-                imagelocation.Y -= 2;
-                imagelocation.X -= 2;
-                fuse--;
-                if (fuse<= 0)
-                {
-                    imagelocation.Y = -20;
-                }
-            }*/
+            
         }
 
 
