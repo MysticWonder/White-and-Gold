@@ -18,14 +18,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D ship1;
-        Texture2D ship2;
+        Texture2D ship;
         SpriteFont menuFont;
         KeyboardState keystate;
         MouseState mousestate;
         Ship s1;
-        public static int mouseLocX, mouseLocY;
-        int modebuffer = 0;
         int KeyDirection = 0; // 1 up, 2 right, 3 down 4 left
         // game menu
         Menu menu;
@@ -58,6 +55,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         Player p1 = new Player("P1");
         // -------------------------------------------------------------------------------------------------------------------------------
 
+
         public Game1()
             : base()
         {
@@ -73,22 +71,26 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            //Makes game full screen and gets/sets screenwidth & height with properties
 
+            graphics.IsFullScreen = true;
+            Vars.screenHeight = Window.ClientBounds.Height;
+            Vars.screenWidth = Window.ClientBounds.Width;
 
             // initialize a TitleMenu object
             menu = new TitleMenu();
 
 
-            ship1 = Content.Load<Texture2D>("sprShip1");
-            ship2 = Content.Load<Texture2D>("sprShip2");
+            ship = Content.Load<Texture2D>("sprShip1");
 
-            // initialize background rectangles
-            backRect1 = new Rectangle(0, 0, 800, 600);
-            backRect2 = new Rectangle(0, 600, 800, 600);
+            // initialize background rectangles, ratios based off of these values (800 = 100%, 600 = 100%)
+            //backRect1 = new Rectangle(0, 0, 800, 600);
+            //backRect2 = new Rectangle(0, 600, 800, 600);
+            backRect1 = new Rectangle(0, 0, Vars.screenWidth, Vars.screenHeight);
+            backRect2 = new Rectangle(0, Vars.screenHeight, Vars.screenWidth, Vars.screenHeight);
 
             // initialize players and ships
-            s1 = new Ship(50, 50, ship1);
+            s1 = new Ship(50, 50, ship);
 
 
             //initialize some enemies(just 5 for testing)
@@ -113,14 +115,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             pausescreen = Content.Load<Texture2D>("menuPause");
             gameoverscreen = Content.Load<Texture2D>("menuGameOver");
             background = Content.Load<Texture2D>("backgroundScroll");
-
             BulletA = Content.Load<Texture2D>("bulleta");
             BulletE = Content.Load<Texture2D>("bullete");
-
             enemy01 = Content.Load<Texture2D>("enemy01");
-
-
-            // TODO: use this.Content to load your game content here
+            //custom spritefonts & sound/music will be loaded here later
         }
 
         /// <summary>
@@ -129,7 +127,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            // I don't think we need to use this method at all
         }
 
         /// <summary>
@@ -142,8 +140,6 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             //check input to determine the change in screens
             menu.ProcessInput();
 
@@ -155,34 +151,30 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 // get keystate
                 keystate = Keyboard.GetState();
                 mousestate = Mouse.GetState();
-                mouseLocX = mousestate.X;
-                mouseLocY = mousestate.Y;
-                s1.Move();
 
-                //// process movement
-                //if (keystate.IsKeyDown(Keys.A))
-                //{
-                //    KeyDirection = 4;
-                //    s1.Move(KeyDirection);
 
-                //}
-                //if (keystate.IsKeyDown(Keys.D))
-                //{
-                //    KeyDirection = 2;
-                //    s1.Move(KeyDirection);
-                //}
-                //if (keystate.IsKeyDown(Keys.W))
-                //{
-                //    KeyDirection = 1;
-                //    s1.Move(KeyDirection);
-                //}
-                //if (keystate.IsKeyDown(Keys.S))
-                //{
-                //    KeyDirection = 3;
-                //    s1.Move(KeyDirection);
-                //}
+                // process movement
+                if (keystate.IsKeyDown(Keys.A))
+                {
+                    KeyDirection = 4;
+                    s1.Move(KeyDirection);
 
-                
+                }
+                if (keystate.IsKeyDown(Keys.D))
+                {
+                    KeyDirection = 2;
+                    s1.Move(KeyDirection);
+                }
+                if (keystate.IsKeyDown(Keys.W))
+                {
+                    KeyDirection = 1;
+                    s1.Move(KeyDirection);
+                }
+                if (keystate.IsKeyDown(Keys.S))
+                {
+                    KeyDirection = 3;
+                    s1.Move(KeyDirection);
+                }
                 // process fire
                 if (mousestate.LeftButton == ButtonState.Pressed)
                 {
@@ -324,18 +316,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
 
 
-            // handle mode switching
-            // check for mode switching
-            if (modebuffer == 0)
-            {
-                modebuffer = 5;
-                s1.ModeSwitch();
 
-            }
-            if (modebuffer > 0)
-            {
-                modebuffer--;
-            }
 
 
             base.Update(gameTime);
@@ -366,15 +347,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     spriteBatch.Draw(background, backRect2, Color.White);
 
                     // Draw the ship
-                    if (s1.MODE == 0)
-                    {
-                        spriteBatch.Draw(ship1, s1.SHIPLOCATION, Color.White);
-                    }
-                    else if (s1.MODE == 1)
-                    {
-                        spriteBatch.Draw(ship2, s1.SHIPLOCATION, Color.White);
-                    }
-
+                    spriteBatch.Draw(ship, s1.SHIPLOCATION, Color.White);
 
                     // For every bullet in the array that actually exists (isn't null), draw it
                     foreach (Bullet val in BulletsAr)
@@ -458,12 +431,12 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             BulletsAr[id] = null;
         }
 
-    }
+        public static class Vars
+        {
+            //Variables for screen ratios
+            public static int screenWidth { get; set; }
+            public static int screenHeight { get; set; }
+        }
 
-    public static class Vars
-    {
-        public static int screenWidth;
-        public static int screenHeight;
     }
-
 }
