@@ -17,11 +17,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         private int idnum;
         private int fuse;
         private int bulstyle;
-        private Game1 g1 = new Game1();
         private int color;
-        SpriteBatch Spritebatch;
-        Texture2D boomboom;
-
 
         public Rectangle BULLETLOCATION { get { return imagelocation; } }
         public int ID { get { return idnum; } }
@@ -40,6 +36,39 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
         }
 
+       public void BulletDraw(Bullet b1, SpriteBatch batch)
+        {
+            switch (bulstyle)
+            {
+                case 0:
+                    if (Alligience == 1)
+                    {
+                        batch.Draw(BulletG, BULLETLOCATION, Color.LightGreen);
+                    }
+                    else
+                    {
+                        batch.Draw(BulletE, BULLETLOCATION, Color.Red);
+                    }
+                break;
+                case 1: // you need new textures for these. This will be a gernade
+                    if (Alligience == 1)
+                    {
+                        batch.Draw(Gernade, BULLETLOCATION, Color.LightGreen);
+                    }
+                    else
+                    {
+                        batch.Draw(Gernade, BULLETLOCATION, Color.Red);
+                    }
+                break;
+                case 2:
+                    batch.Draw(Explosion, new Rectangle(imagelocation.X - 50,imagelocation.Y - 50, 100,100), Color.LightGreen);
+
+                break;
+
+            }
+
+            
+        }
 
 
         public void BulletMove()
@@ -59,22 +88,25 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             {
                 if (PorE == 1)
                 {
-                    if (fuse > 50)
-                    {
-                        imagelocation.Y -= 2;
-                    }
-                    else
-                    {
-                        imagelocation.X -= 2;
-                    }
+                    
+                    imagelocation.Y -= 2;
+                    
 
                     fuse--;
 
                     if (fuse <= 0)
                     {
-                        
-                        imagelocation.Y = -10;
+                        fuse = 30;
+                        bulstyle = 2;
                     }
+                }
+            }
+            if (bulstyle == 2)
+            {
+                fuse--;
+                if (fuse <= 0)
+                {
+                    imagelocation.Y = -10;
                 }
             }
             

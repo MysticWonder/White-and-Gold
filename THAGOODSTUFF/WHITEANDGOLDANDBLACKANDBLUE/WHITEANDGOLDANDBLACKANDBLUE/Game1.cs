@@ -43,8 +43,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         int bulletcounter = 0;
         int testcounter = 0;
         int BulletBuffer = 0;
-        Texture2D BulletE;
-        Texture2D BulletA;
+        public static Texture2D BulletE;
+        public static Texture2D BulletA;
+        public static Texture2D BulletG;
+        public static Texture2D Explosion;
+        public static Texture2D Gernade;
 
         // enemy attributes
         //random # generator
@@ -53,10 +56,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         //list of enemies
         List<Enemy> enemies = new List<Enemy>();
 
-        // -------------------------------------------------------------------------------------------------------------------------------
         // Variables for collisions
         Player p1 = new Player("P1");
-        // -------------------------------------------------------------------------------------------------------------------------------
+
 
         public Game1()
             : base()
@@ -109,7 +111,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             BulletA = Content.Load<Texture2D>("bulleta");
             BulletE = Content.Load<Texture2D>("bullete");
             enemy01 = Content.Load<Texture2D>("enemy01");
-
+            BulletG = Content.Load<Texture2D>("bulletg");
+            Explosion = Content.Load<Texture2D>("bestexplosion");
+            Gernade = Content.Load<Texture2D>("Gernade");
 
             // TODO: use this.Content to load your game content here
         }
@@ -395,15 +399,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     {
                         if (val != null)
                         {
-                            if (val.Alligience == 1)
-                            {
-                                spriteBatch.Draw(BulletA, val.BULLETLOCATION, Color.White);
-                            }
-                            else
-                            {
-                                spriteBatch.Draw(BulletE, val.BULLETLOCATION, Color.White);
-                            }
-                            testcounter++;
+                            val.BulletDraw(val, spriteBatch);
                         }
                     }
 
