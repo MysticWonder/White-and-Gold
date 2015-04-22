@@ -18,6 +18,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         private Rectangle position;
         private Boolean alive;
         private int health;
+        private int mode;
 
         //default constructor
         public Enemy(Rectangle pos)
@@ -30,6 +31,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         // Properties
         public int HEALTH { get { return health; } }
         public Rectangle POSITION { get { return position; } }
+        public int MODE { get { return mode; } set { mode = value; } }
 
 
         //movement

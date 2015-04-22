@@ -301,6 +301,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                             {
                                 RemoveBullet(var.ID);
                                 p1.LoseLife();
+                                s1 = new Ship(50, 50, ship1);
 
                                 if (p1.LostGame())
                                 {
@@ -313,13 +314,21 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         {
                             foreach (Enemy evar in enemies)
                             {
-                                if (var.BULLETLOCATION.Intersects(evar.POSITION))
+                                if (var.BULLETLOCATION.Intersects(evar.POSITION)&&(s1.MODE==evar.MODE))
                                 {
                                     RemoveBullet(var.ID);
                                     evar.TakeHit();
                                 }
                             }
                         }
+                    }
+                }
+                foreach(Enemy e in enemies)
+                {
+                    if(e.POSITION.Intersects(s1.SHIPLOCATION))
+                    {
+                        p1.LoseLife();
+                        s1 = new Ship(50, 50, ship1);
                     }
                 }
                
