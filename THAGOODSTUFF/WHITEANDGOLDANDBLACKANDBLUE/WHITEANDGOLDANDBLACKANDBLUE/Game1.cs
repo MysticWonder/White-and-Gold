@@ -319,7 +319,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         {
                             foreach (Enemy evar in enemies)
                             {
-                                if (var.BULLETLOCATION.Intersects(evar.POSITION))
+                                if (var.BULLETLOCATION.Intersects(evar.POSITION)&& s1.MODE == evar.MODE)
                                 {
                                     switch (var.BULSTYLE)
                                     {
@@ -343,6 +343,21 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                                 }
                             }
                         }
+                    }
+                }
+
+                foreach (Enemy e in enemies)
+                {
+                    if (e.POSITION.Intersects(s1.SHIPLOCATION))
+                    {
+                        p1.LoseLife();
+                        if (p1.LostGame())
+                        {
+                            menu.Type = "GameOver";
+                        }
+                        e.TakeHit();
+                        e.TakeHit();
+                        e.TakeHit();
                     }
                 }
                

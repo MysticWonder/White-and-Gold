@@ -22,6 +22,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         private int health;
         private int FireCD;
         private int timer; // for patterns of movement
+        private int mode;
 
         //default constructor
         public Enemy(Rectangle pos)
@@ -32,12 +33,13 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             curmove = MovementState.Pattern2;
             FireCD = 10; // set a base value. Enemies wont be able to shoot IMMEDIATELY after being spawned
             timer = -1; // -1 means that it has yet to start moving
+            mode = 0;
         }
 
         // Properties
         public int HEALTH { get { return health; } }
         public Rectangle POSITION { get { return position; } }
-
+        public int MODE { get { return mode; } }
 
         //movement
         public void Update()
