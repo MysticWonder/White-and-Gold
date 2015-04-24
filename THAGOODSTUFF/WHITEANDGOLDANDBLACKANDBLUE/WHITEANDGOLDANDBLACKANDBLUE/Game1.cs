@@ -62,6 +62,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         // Variables for collisions
         Player p1 = new Player("P1");
 
+        //Rescaling vars
+
+
 
         public Game1()
             : base()
@@ -94,6 +97,12 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
             // initialize players and ships
             s1 = new Ship(50, 50, ship1);
+
+            // set resolutions
+            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+            graphics.PreferredBackBufferWidth = Window.ClientBounds.Height;
+            graphics.ApplyChanges();
 
 
             base.Initialize();
