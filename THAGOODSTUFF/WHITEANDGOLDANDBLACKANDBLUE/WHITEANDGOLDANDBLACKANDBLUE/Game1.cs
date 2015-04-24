@@ -39,7 +39,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         Rectangle backRect2;
 
         // bullet attributes
-        Bullet[] BulletsAr = new Bullet[200];
+        public static Bullet[] BulletsAr = new Bullet[200];
         int bulletcounter = 0;
         int testcounter = 0;
         int BulletBuffer = 0;
@@ -54,7 +54,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         Random RNG = new Random();
         Texture2D enemy01;
         //list of enemies
-        List<Enemy> enemies = new List<Enemy>();
+        public static List<Enemy> enemies = new List<Enemy>();
 
         // Variables for collisions
         Player p1 = new Player("P1");
@@ -82,8 +82,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             menu = new TitleMenu();
 
 
-            ship1 = Content.Load<Texture2D>("sprShip1");
-            ship2 = Content.Load<Texture2D>("sprShip2");
+            ship1 = Content.Load<Texture2D>("Ship1");
+            ship2 = Content.Load<Texture2D>("Ship2");
 
             // initialize background rectangles
             backRect1 = new Rectangle(0, 0, 800, 600);
@@ -241,7 +241,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     if (BulletBuffer == 0)
                     {
                         BulletBuffer = 5;
-                        enemies.Add(new Enemy(new Rectangle(300, 50, 50, 50)));
+                        enemies.Add(new Enemy(new Rectangle(300, -50, 50, 50)));
                     }
                 }
 
@@ -258,17 +258,17 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     {
                         var.BulletMove();
 
-                        if (var.BULLETLOCATION.Y < 0)
+                        if (var.BULLETLOCATION.Y < 0 || var.BULLETLOCATION.Y > 1000)
                         {
                             RemoveBullet(var.ID);
                         }
                     }
                 }
 
-                //enemy move
+                //Update Enemy Movement
                 foreach (Enemy e in enemies)
                 {
-                    e.Move();
+                    e.Update();
                 }
                
 
@@ -278,6 +278,12 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     foreach (Enemy e in enemies)
                     {
                         if (e.HEALTH <= 0)
+                        {
+                            enemies.Remove(e);
+                            break;
+                        }
+
+                        if (e.POSITION.Y > 1000)
                         {
                             enemies.Remove(e);
                             break;
@@ -301,7 +307,6 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                             {
                                 RemoveBullet(var.ID);
                                 p1.LoseLife();
-                                s1 = new Ship(50, 50, ship1);
 
                                 if (p1.LostGame())
                                 {
@@ -314,21 +319,30 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         {
                             foreach (Enemy evar in enemies)
                             {
-                                if (var.BULLETLOCATION.Intersects(evar.POSITION)&&(s1.MODE==evar.MODE))
+                                if (var.BULLETLOCATION.Intersects(evar.POSITION))
                                 {
-                                    RemoveBullet(var.ID);
-                                    evar.TakeHit();
+                                    switch (var.BULSTYLE)
+                                    {
+                                        case 1:
+                                            var.FUSE = 0;
+                                            evar.TakeHit();
+                                            evar.TakeHit();
+                                            evar.TakeHit();
+                                            break;
+                                        case 2:
+                                            evar.TakeHit();
+                                            evar.TakeHit();
+                                            evar.TakeHit();
+                                            break;
+                                        default: 
+                                            RemoveBullet(var.ID);
+                                            evar.TakeHit();
+                                            break;
+                                    }
+
                                 }
                             }
                         }
-                    }
-                }
-                foreach(Enemy e in enemies)
-                {
-                    if(e.POSITION.Intersects(s1.SHIPLOCATION))
-                    {
-                        p1.LoseLife();
-                        s1 = new Ship(50, 50, ship1);
                     }
                 }
                

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WHITEANDGOLDANDBLACKANDBLUE
 {
-    class Bullet : Game1
+    public class Bullet : Game1
     {
         private int PorE; // 0 is enemy, 1 is player
         private int xpos;
@@ -21,7 +21,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
         public Rectangle BULLETLOCATION { get { return imagelocation; } }
         public int ID { get { return idnum; } }
-
+        public int FUSE { get { return fuse; } set { fuse = value; } }
+        public int BULSTYLE { get { return bulstyle; } }
         public int Alligience { get { return PorE; } }
 
         public Bullet(int x, int y, int alligience, int id, int style, int bfuse, int color)
