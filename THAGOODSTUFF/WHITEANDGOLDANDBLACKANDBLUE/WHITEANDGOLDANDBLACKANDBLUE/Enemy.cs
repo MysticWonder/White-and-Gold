@@ -24,13 +24,43 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         private int timer; // for patterns of movement
         private int mode;
 
+        Random RNG = new Random();
+        int movementRand;
+
         //default constructor
         public Enemy(Rectangle pos)
         {
             position = pos;
             //alive = true;
             health = 3;
-            curmove = MovementState.Pattern2;
+            movementRand = RNG.Next(1, 8);
+            switch (movementRand)
+            {
+                case 1:
+                    curmove = MovementState.StraightDown;
+                    break;
+                case 2:
+                    curmove = MovementState.HardLeft;
+                    break;
+                case 3:
+                    curmove = MovementState.HardRight;
+                    break;
+                case 4:
+                    curmove = MovementState.Pattern1;
+                    break;
+                case 5:
+                    curmove = MovementState.Pattern2;
+                    break;
+                case 6:
+                    curmove = MovementState.Pattern3;
+                    break;
+                case 7:
+                    curmove = MovementState.Pattern4;
+                    break;
+                case 8:
+                    curmove = MovementState.Idle;
+                    break;
+            }
             FireCD = 10; // set a base value. Enemies wont be able to shoot IMMEDIATELY after being spawned
             timer = -1; // -1 means that it has yet to start moving
             mode = 0;

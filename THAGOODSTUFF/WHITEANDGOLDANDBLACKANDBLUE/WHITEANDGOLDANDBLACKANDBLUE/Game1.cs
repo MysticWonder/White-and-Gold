@@ -56,6 +56,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         //list of enemies
         public static List<Enemy> enemies = new List<Enemy>();
 
+        //spawn enemy #
+        int spawnE;
+
         // Variables for collisions
         Player p1 = new Player("P1");
 
@@ -386,6 +389,17 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             if (modebuffer > 0)
             {
                 modebuffer--;
+            }
+
+            //-------------------------------------------------Enemy Spawn------------------------------------------------------------------
+            int spawnEnemyRoll = RNG.Next(1,60);
+            if (spawnEnemyRoll <= 2)
+            {
+                if (BulletBuffer == 0)
+                {
+                    BulletBuffer = 5;
+                    enemies.Add(new Enemy(new Rectangle(RNG.Next(1,600), -50, 50, 50)));
+                }
             }
 
 
