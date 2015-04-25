@@ -34,6 +34,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         Texture2D pausescreen;
         Texture2D gameoverscreen;
         Texture2D background;
+        Texture2D scrollin;
         // rectangles for background graphics
         Rectangle backRect1;
         Rectangle backRect2;
@@ -62,9 +63,6 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         // Variables for collisions
         Player p1 = new Player("P1");
 
-        //Rescaling vars
-
-
 
         public Game1()
             : base()
@@ -92,17 +90,21 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             ship2 = Content.Load<Texture2D>("Ship2");
 
             // initialize background rectangles
-            backRect1 = new Rectangle(0, 0, 800, 600);
-            backRect2 = new Rectangle(0, 600, 800, 600);
-
-            // initialize players and ships
-            s1 = new Ship(50, 50, ship1);
+            backRect1 = new Rectangle(0, 0, 800, 700);
+            backRect2 = new Rectangle(0, 700, 800, 700);
 
             // set resolutions
             graphics.IsFullScreen = true;
             graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
-            graphics.PreferredBackBufferWidth = Window.ClientBounds.Height;
+            graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
             graphics.ApplyChanges();
+
+            // allow scaling to be applied to other classes if needed (ex. ship boundaries)
+            Vars.screenHeight = graphics.PreferredBackBufferHeight;
+            Vars.screenWidth = graphics.PreferredBackBufferWidth;
+
+                        // initialize players and ships
+            s1 = new Ship((Vars.screenWidth / 2), ((Vars.screenHeight * 9) / 10), ship1);
 
 
             base.Initialize();
@@ -119,14 +121,14 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             titlescreen = Content.Load<Texture2D>("menuStart");
             pausescreen = Content.Load<Texture2D>("menuPause");
             gameoverscreen = Content.Load<Texture2D>("menuGameOver");
-            background = Content.Load<Texture2D>("backgroundScroll");
+            background = Content.Load<Texture2D>("SPAAAAACE");
+            scrollin = Content.Load<Texture2D>("SPACE2");
             BulletA = Content.Load<Texture2D>("bulleta");
             BulletE = Content.Load<Texture2D>("bullete");
-            enemy01 = Content.Load<Texture2D>("enemy01");
+            enemy01 = Content.Load<Texture2D>("SPACEBEE");
             BulletG = Content.Load<Texture2D>("bulletg");
             Explosion = Content.Load<Texture2D>("bestexplosion");
             Gernade = Content.Load<Texture2D>("Gernade");
-
             // TODO: use this.Content to load your game content here
         }
 
@@ -323,6 +325,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                                 if (p1.LostGame())
                                 {
                                     menu.Type = "GameOver";
+                                    enemies.Clear();
+                                    s1.X = Vars.screenWidth / 2;
+                                    s1.Y = (Vars.screenHeight * 9) / 10;
                                 }
                             }
                         }
@@ -366,6 +371,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         if (p1.LostGame())
                         {
                             menu.Type = "GameOver";
+                            enemies.Clear();
+                            s1.X = Vars.screenWidth / 2;
+                            s1.Y = (Vars.screenHeight * 9) / 10;
                         }
                         e.TakeHit();
                         e.TakeHit();
@@ -407,7 +415,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 if (BulletBuffer == 0)
                 {
                     BulletBuffer = 5;
-                    enemies.Add(new Enemy(new Rectangle(RNG.Next(1,600), -50, 50, 50)));
+                    enemies.Add(new Enemy(new Rectangle(RNG.Next(1,600), -50, 75, 75)));
                 }
             }
 
@@ -426,7 +434,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
@@ -442,7 +450,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     menu = new GameScreen();
                     // Draw the backgrounds
                     spriteBatch.Draw(background, backRect1, Color.White);
-                    spriteBatch.Draw(background, backRect2, Color.White);
+                    spriteBatch.Draw(scrollin, backRect2, Color.White);
 
                     // Draw the ship
                     if (s1.MODE == 0)

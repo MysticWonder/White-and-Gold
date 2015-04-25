@@ -36,6 +36,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         {
            // this.shiplocation.X = WHITEANDGOLDANDBLACKANDBLUE.Game1.mouseLocX;
            // this.shiplocation.Y = WHITEANDGOLDANDBLACKANDBLUE.Game1.mouseLocY;
+            
             switch (direction)
             {
                 case 0:
@@ -45,10 +46,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     if ((shiplocation.Y - 3) > 0) { shiplocation.Y = shiplocation.Y - 3; }
                     break;
                 case 2:
-                    if ((shiplocation.X + 3) < 750) { shiplocation.X = shiplocation.X + 3; }
+                    if ((shiplocation.X + 3) < (Vars.screenWidth) - shiplocation.Width) { shiplocation.X = shiplocation.X + 3; }
                     break;
                 case 3:
-                    if ((shiplocation.Y + 3) < 430) { shiplocation.Y = shiplocation.Y + 3; }
+                    if ((shiplocation.Y + 3) < (Vars.screenHeight) - shiplocation.Width) { shiplocation.Y = shiplocation.Y + 3; }
                     break;
                 case 4:
                     if ((shiplocation.X - 3) > 0) { shiplocation.X = shiplocation.X - 3; }
