@@ -10,7 +10,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 {
     class TitleMenu : Menu
     {
-
+        
 
         // constructor
         public TitleMenu()
@@ -48,6 +48,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 current.Position.X >= 290 && current.Position.X <= 510 && current.Position.Y >= 280 && current.Position.Y <= 360)
             {
                 //open external tool
+                
 
             }
             //make the current state the previous state

@@ -56,6 +56,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         Texture2D enemy01;
         //list of enemies
         public static List<Enemy> enemies = new List<Enemy>();
+        
 
         //spawn enemy #
         int spawnE;
@@ -289,7 +290,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 //enemy despawn at bottom
                 if (enemies.Count != 0)
                 {
-                    foreach (Enemy e in enemies)
+                    foreach (Enemy e in enemies.ToArray())
                     {
                         if (e.HEALTH <= 0)
                         {
@@ -351,7 +352,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                                             evar.TakeHit();
                                             evar.TakeHit();
                                             break;
-                                        default: 
+                                           default: 
                                             RemoveBullet(var.ID);
                                             evar.TakeHit();
                                             break;
@@ -363,7 +364,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     }
                 }
 
-                foreach (Enemy e in enemies)
+                foreach (Enemy e in enemies.ToArray())
                 {
                     if (e.POSITION.Intersects(s1.SHIPLOCATION))
                     {

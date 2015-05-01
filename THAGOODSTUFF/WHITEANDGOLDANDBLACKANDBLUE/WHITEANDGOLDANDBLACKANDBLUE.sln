@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHITEANDGOLDANDBLACKANDBLUE", "WHITEANDGOLDANDBLACKANDBLUE\WHITEANDGOLDANDBLACKANDBLUE.csproj", "{5D2AC244-1539-4768-B6CA-AF58D42190AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalTool1", "..\..\..\..\..\..\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\ExternalTool1.csproj", "{6F5BC7F0-9B09-4EE4-B7B5-06E951BFB8E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalTool1", "ExternalTool1\ExternalTool1\ExternalTool1.csproj", "{6F5BC7F0-9B09-4EE4-B7B5-06E951BFB8E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

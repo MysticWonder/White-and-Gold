@@ -14,7 +14,7 @@ namespace ExternalTool1
     public partial class Form1 : Form
     {
         string currentDifficulty { get; set; }
-        string previousDifficulty { get; set; } 
+        string previousDifficulty { get; set; }
         StreamWriter externalWriter { get; set; }
         StreamReader externalReader { get; set; }
         bool difficultyChanged { get; set; }
