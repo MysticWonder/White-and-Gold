@@ -1,0 +1,9 @@
+D:\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\bin\Debug\ExternalTool1.exe.config
+D:\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\bin\Debug\ExternalTool1.exe
+D:\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\bin\Debug\ExternalTool1.pdb
+D:\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.csprojResolveAssemblyReference.cache
+D:\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.Form1.resources
+D:\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.Properties.Resources.resources
+D:\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.csproj.GenerateResource.Cache
+D:\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.exe
+D:\SchoolStuff\GDAPPSII_III\P02_M02\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.pdb
