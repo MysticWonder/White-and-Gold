@@ -29,7 +29,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
         public Ship(int x, int y, Texture2D image)
         {
-            shiplocation = new Rectangle(x, y, image.Width /2 , image.Height /2);
+            shiplocation = new Rectangle(x, y, image.Width /3 , image.Height /3);
         }
 
         public void Move(int direction)

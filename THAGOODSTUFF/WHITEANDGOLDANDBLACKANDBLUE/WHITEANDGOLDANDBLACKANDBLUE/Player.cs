@@ -17,7 +17,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         // Properties
         public String PLAYERNAME { get { return playerName; } }
 
-        public int LIVESLEFT { get { return LivesLeft; } }
+        public int LIVESLEFT { get { return LivesLeft; } set { LivesLeft = value; } }
 
         // Constructor
         public Player(string name)

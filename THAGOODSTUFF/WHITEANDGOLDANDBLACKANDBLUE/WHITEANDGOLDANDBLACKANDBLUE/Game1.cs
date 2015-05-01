@@ -327,6 +327,14 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                                 {
                                     menu.Type = "GameOver";
                                     enemies.Clear();
+                                    foreach (Bullet bul in BulletsAr)
+                                    {
+                                        if (bul != null)
+                                        {
+                                            RemoveBullet(bul.ID);
+                                        }
+                                    }
+                                    p1.LIVESLEFT = 3;
                                     s1.X = Vars.screenWidth / 2;
                                     s1.Y = (Vars.screenHeight * 9) / 10;
                                 }
@@ -368,17 +376,26 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 {
                     if (e.POSITION.Intersects(s1.SHIPLOCATION))
                     {
+                        e.TakeHit();
+                        e.TakeHit();
+                        e.TakeHit();
                         p1.LoseLife();
                         if (p1.LostGame())
                         {
                             menu.Type = "GameOver";
                             enemies.Clear();
+                            foreach (Bullet bul in BulletsAr)
+                            {
+                                if (bul != null)
+                                {
+                                    RemoveBullet(bul.ID);
+                                }
+                            }
+                            p1.LIVESLEFT = 3;
                             s1.X = Vars.screenWidth / 2;
                             s1.Y = (Vars.screenHeight * 9) / 10;
                         }
-                        e.TakeHit();
-                        e.TakeHit();
-                        e.TakeHit();
+                        
                     }
                 }
                
@@ -408,8 +425,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             {
                 modebuffer--;
             }
-
-            //-------------------------------------------------Enemy Spawn------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------------------------
+            //-------------------------------------------------Enemy Spawn---------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------------------------
             int spawnEnemyRoll = RNG.Next(1,60);
             if (spawnEnemyRoll <= 2)
             {
