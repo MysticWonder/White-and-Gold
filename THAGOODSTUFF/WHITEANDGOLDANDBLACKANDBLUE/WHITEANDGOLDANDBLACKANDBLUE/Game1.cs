@@ -124,10 +124,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             gameoverscreen = Content.Load<Texture2D>("menuGameOver");
             background = Content.Load<Texture2D>("SPAAAAACE");
             scrollin = Content.Load<Texture2D>("SPACE2");
-            BulletA = Content.Load<Texture2D>("bulleta");
-            BulletE = Content.Load<Texture2D>("bullete");
-            enemy01 = Content.Load<Texture2D>("SPACEBEE");
-            BulletG = Content.Load<Texture2D>("bulletg");
+            BulletA = Content.Load<Texture2D>("BLET");
+            BulletE = Content.Load<Texture2D>("BLET");
+            enemy01 = Content.Load<Texture2D>("NME");
+            BulletG = Content.Load<Texture2D>("BLET");
             Explosion = Content.Load<Texture2D>("bestexplosion");
             Gernade = Content.Load<Texture2D>("Gernade");
             // TODO: use this.Content to load your game content here
@@ -494,7 +494,14 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     //draw enemy01
                     foreach (Enemy e in enemies)
                     {
-                        spriteBatch.Draw(enemy01, e.POSITION, Color.White);
+                        Color enemyMode;
+                        if (e.MODE == 0)
+                        {
+                            enemyMode = Color.White;
+                        }
+                        else { enemyMode = Color.Red; }
+
+                        spriteBatch.Draw(enemy01, e.POSITION, enemyMode);
                     }
 
 

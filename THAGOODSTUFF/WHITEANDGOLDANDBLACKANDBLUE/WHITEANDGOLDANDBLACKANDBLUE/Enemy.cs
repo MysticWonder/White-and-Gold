@@ -32,7 +32,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         {
             position = pos;
             //alive = true;
-            health = 3;
+            health = RNG.Next(1,4);
             movementRand = RNG.Next(1, 8);
             switch (movementRand)
             {
@@ -63,7 +63,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             }
             FireCD = 10; // set a base value. Enemies wont be able to shoot IMMEDIATELY after being spawned
             timer = -1; // -1 means that it has yet to start moving
-            mode = 0;
+            mode = RNG.Next(0,2);
         }
 
         // Properties
@@ -227,6 +227,12 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             {
                 FireCD = 70;
                 Fire();
+            }
+
+            int modeSwitch = RNG.Next(0, 100);
+            if (modeSwitch >= 56 && modeSwitch <= 60)
+            {
+                this.mode = RNG.Next(0, 2);
             }
         }
 
