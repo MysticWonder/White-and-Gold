@@ -24,8 +24,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         public int FUSE { get { return fuse; } set { fuse = value; } }
         public int BULSTYLE { get { return bulstyle; } }
         public int Alligience { get { return PorE; } }
+        public int COLOR { get { return color; } }
 
-        public Bullet(int x, int y, int alligience, int id, int style, int bfuse, int color)
+        public Bullet(int x, int y, int alligience, int id, int style, int bfuse, int icolor)
         {
             xpos = x;
             ypos = y;
@@ -34,6 +35,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             bulstyle = style;
             fuse = bfuse;
             imagelocation = new Rectangle(x, y, 20, 20);
+            color = icolor;
 
         }
 
@@ -44,11 +46,26 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 case 0:
                     if (Alligience == 1)
                     {
-                        batch.Draw(BulletG, BULLETLOCATION, Color.LightGreen);
+                        if (color == 0)
+                        {
+
+                            batch.Draw(BulletG, BULLETLOCATION, Color.Green );
+                        }
+                        else
+                        {
+                            batch.Draw(BulletG, BULLETLOCATION, Color.LightGreen);
+                        }
                     }
                     else
                     {
-                        batch.Draw(BulletE, BULLETLOCATION, Color.Red);
+                        if (color == 0)
+                        {
+                            batch.Draw(BulletE, BULLETLOCATION, Color.Orange);
+                        }
+                        else
+                        {
+                            batch.Draw(BulletE, BULLETLOCATION, Color.Red);
+                        }
                     }
                 break;
                 case 1: // you need new textures for these. This will be a gernade

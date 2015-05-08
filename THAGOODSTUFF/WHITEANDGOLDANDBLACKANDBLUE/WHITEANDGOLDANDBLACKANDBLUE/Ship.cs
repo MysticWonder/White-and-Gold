@@ -29,7 +29,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
         public Ship(int x, int y, Texture2D image)
         {
-            shiplocation = new Rectangle(x, y, image.Width /3 , image.Height /3);
+            shiplocation = new Rectangle(x, y, image.Width , image.Height);
         }
 
         public void Move(int direction)
@@ -43,16 +43,16 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     // do nothing
                     break;
                 case 1:
-                    if ((shiplocation.Y - 3) > 0) { shiplocation.Y = shiplocation.Y - 3; }
+                    if ((shiplocation.Y - 3) > 0) { shiplocation.Y = shiplocation.Y - 4; }
                     break;
                 case 2:
-                    if ((shiplocation.X + 3) < (Vars.screenWidth) - shiplocation.Width) { shiplocation.X = shiplocation.X + 3; }
+                    if ((shiplocation.X + 3) < (Vars.screenWidth) - shiplocation.Width) { shiplocation.X = shiplocation.X + 5; }
                     break;
                 case 3:
-                    if ((shiplocation.Y + 3) < (Vars.screenHeight) - shiplocation.Width) { shiplocation.Y = shiplocation.Y + 3; }
+                    if ((shiplocation.Y + 3) < (Vars.screenHeight) - shiplocation.Width) { shiplocation.Y = shiplocation.Y + 4; }
                     break;
                 case 4:
-                    if ((shiplocation.X - 3) > 0) { shiplocation.X = shiplocation.X - 3; }
+                    if ((shiplocation.X - 3) > 0) { shiplocation.X = shiplocation.X - 5; }
                     break;
             }
 

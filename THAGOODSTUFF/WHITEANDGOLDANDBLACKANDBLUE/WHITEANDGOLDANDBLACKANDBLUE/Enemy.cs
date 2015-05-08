@@ -82,9 +82,17 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     position.Y++;
                     break;
                 case MovementState.HardLeft:
+                    if (position.Y < 10)
+                    {
+                        position.Y++;
+                    }
                     position.X--;
                     break;
                 case MovementState.HardRight:
+                    if (position.Y < 10)
+                    {
+                        position.Y++;
+                    }
                     position.X++;
                     break;
                 case MovementState.Pattern1: // In this pattern the enemy swoops to the left. Starting by moving directly down, and ending directly right
@@ -170,6 +178,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         timer--;
                     }
 
+                    if (position.Y < 10)
+                    {
+                        position.Y++;
+                    }
+
                     if (timer < 0)
                     {
                         timer = 200;
@@ -196,7 +209,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         {
                             timer = 1;
                         }
-                        
+
+                        if (position.Y < 10)
+                        {
+                            position.Y++;
+                        }
                         if (timer == 0)
                         {
                             position.X -= 2;
@@ -229,11 +246,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 Fire();
             }
 
-            int modeSwitch = RNG.Next(0, 100);
+            /*int modeSwitch = RNG.Next(0, 100);
             if (modeSwitch >= 56 && modeSwitch <= 60)
             {
                 this.mode = RNG.Next(0, 2);
-            }
+            }*/
         }
 
         private void Fire()
@@ -246,7 +263,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             {
                 if (BulletsAr[bulletcounter] == null)
                 {
-                    Bullet b1 = new Bullet(POSITION.X + (POSITION.Width / 2), POSITION.Y + POSITION.Height, 0, bulletcounter, 0, 0, 0);
+                    Bullet b1 = new Bullet(POSITION.X + (POSITION.Width / 2), POSITION.Y + POSITION.Height, 0, bulletcounter, 0, 0, mode);
                     BulletsAr[bulletcounter] = b1;
                     
                     break;

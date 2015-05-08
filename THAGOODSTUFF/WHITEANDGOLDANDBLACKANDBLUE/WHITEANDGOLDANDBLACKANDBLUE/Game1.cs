@@ -87,8 +87,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             menu = new TitleMenu();
 
 
-            ship1 = Content.Load<Texture2D>("Ship1");
-            ship2 = Content.Load<Texture2D>("Ship2");
+            ship1 = Content.Load<Texture2D>("Ship1.5");
+            ship2 = Content.Load<Texture2D>("Ship2.5");
 
             // initialize background rectangles
             backRect1 = new Rectangle(0, 0, 800, 700);
@@ -119,9 +119,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            titlescreen = Content.Load<Texture2D>("menuStart");
+            titlescreen = Content.Load<Texture2D>("menuTitle");
             pausescreen = Content.Load<Texture2D>("menuPause");
-            gameoverscreen = Content.Load<Texture2D>("menuGameOver");
+            gameoverscreen = Content.Load<Texture2D>("menuGO");
             background = Content.Load<Texture2D>("SPAAAAACE");
             scrollin = Content.Load<Texture2D>("SPACE2");
             BulletA = Content.Load<Texture2D>("BLET");
@@ -232,7 +232,16 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     if (BulletBuffer == 0)
                     {
                         BulletBuffer = 20;
-                        AddBullet(1, 0, 0, 0);
+                        if (s1.MODE == 0)
+                        {
+
+                            AddBullet(1, 0, 0, 0);
+                        }
+                        else
+                        {
+
+                            AddBullet(1, 1, 0, 0);
+                        }
                     }
                 }
 
@@ -318,7 +327,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     {
                         if (var.Alligience == 0)
                         {
-                            if (var.BULLETLOCATION.Intersects(s1.SHIPLOCATION))
+                            if (var.BULLETLOCATION.Intersects(s1.SHIPLOCATION) && s1.MODE == var.COLOR)
                             {
                                 RemoveBullet(var.ID);
                                 p1.LoseLife();
@@ -345,7 +354,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         {
                             foreach (Enemy evar in enemies)
                             {
-                                if (var.BULLETLOCATION.Intersects(evar.POSITION)&& s1.MODE == evar.MODE)
+                                if (var.BULLETLOCATION.Intersects(evar.POSITION)&& s1.MODE != evar.MODE)
                                 {
                                     switch (var.BULSTYLE)
                                     {
@@ -428,14 +437,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             //---------------------------------------------------------------------------------------------------------------------------
             //-------------------------------------------------Enemy Spawn---------------------------------------------------------------
             //---------------------------------------------------------------------------------------------------------------------------
-            int spawnEnemyRoll = RNG.Next(1,60);
+            int spawnEnemyRoll = RNG.Next(1,100);
             if (spawnEnemyRoll <= 2)
             {
-                if (BulletBuffer == 0)
-                {
-                    BulletBuffer = 5;
                     enemies.Add(new Enemy(new Rectangle(RNG.Next(1,600), -50, 75, 75)));
-                }
+                
             }
 
 
