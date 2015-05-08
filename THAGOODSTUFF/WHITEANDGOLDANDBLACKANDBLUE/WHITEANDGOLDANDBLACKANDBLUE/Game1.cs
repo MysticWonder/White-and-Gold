@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 //using Microsoft.Xna.Framework.GamerServices;
+using System.IO;
 #endregion
 
 namespace WHITEANDGOLDANDBLACKANDBLUE
@@ -63,6 +64,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
         // Variables for collisions
         Player p1 = new Player("P1");
+
+        //Difficulty attributes and prop
+        public static int difficulty;
+        public static int Difficulty { get { return difficulty; } set { difficulty = value; } }
 
 
         public Game1()
@@ -126,7 +131,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             scrollin = Content.Load<Texture2D>("SPACE2");
             BulletA = Content.Load<Texture2D>("BLET");
             BulletE = Content.Load<Texture2D>("BLET");
-            enemy01 = Content.Load<Texture2D>("NME");
+            enemy01 = Content.Load<Texture2D>("NME2");
             BulletG = Content.Load<Texture2D>("BLET");
             Explosion = Content.Load<Texture2D>("bestexplosion");
             Gernade = Content.Load<Texture2D>("Gernade");

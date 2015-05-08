@@ -32,7 +32,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         {
             position = pos;
             //alive = true;
-            health = RNG.Next(1,4);
+            health = Difficulty;
             movementRand = RNG.Next(1, 8);
             switch (movementRand)
             {
