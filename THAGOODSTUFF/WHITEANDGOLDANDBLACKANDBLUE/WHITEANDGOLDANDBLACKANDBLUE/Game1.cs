@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,11 +20,13 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont gameFont;
         Texture2D ship1;
         Texture2D ship2;
         SpriteFont menuFont;
         KeyboardState keystate;
         MouseState mousestate;
+        Stopwatch watch;
         Ship s1;
         public static int mouseLocX, mouseLocY;
         int modebuffer = 0;
@@ -69,6 +72,12 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         public static int difficulty;
         public static int Difficulty { get { return difficulty; } set { difficulty = value; } }
 
+        // score attributes
+        int prevscore;
+        int scoreadd = 1;
+        Scores scoreRead;
+        int highScore;
+
 
         public Game1()
             : base()
@@ -112,6 +121,12 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         // initialize players and ships
             s1 = new Ship((Vars.screenWidth / 2), ((Vars.screenHeight * 9) / 10), ship1);
 
+            // intialize the watch
+            watch = new Stopwatch();
+
+            // initialize the scorekeeping object
+            scoreRead = new Scores();
+
 
             base.Initialize();
         }
@@ -135,6 +150,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             BulletG = Content.Load<Texture2D>("BLET");
             Explosion = Content.Load<Texture2D>("bestexplosion");
             Gernade = Content.Load<Texture2D>("Gernade");
+            gameFont = Content.Load<SpriteFont>("Font1");
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -186,6 +203,12 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             // scroll the background
             backRect1.Y += 5;
             backRect2.Y += 5;
+
+            // start the game time
+            watch.Start();
+
+            // increase score
+            p1.SCORE += scoreadd * 5;
 
 
 
@@ -340,6 +363,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                                         }
                                     }
                                     p1.LIVESLEFT = 3;
+                                    watch.Reset();
+                                    highScore = scoreRead.WriteScore(p1.SCORE);
+                                    prevscore = p1.SCORE;
+                                    p1.SCORE = 0;
                                     s1.X = Vars.screenWidth / 2;
                                     s1.Y = (Vars.screenHeight * 9) / 10;
                                 }
@@ -368,6 +395,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                                            default: 
                                             RemoveBullet(var.ID);
                                             evar.TakeHit();
+                                            p1.SCORE += 1000;
                                             break;
                                     }
 
@@ -397,6 +425,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                                 }
                             }
                             p1.LIVESLEFT = 3;
+                            watch.Reset();
+                            highScore = scoreRead.WriteScore(p1.SCORE);
+                            prevscore = p1.SCORE;
+                            p1.SCORE = 0;
                             s1.X = Vars.screenWidth / 2;
                             s1.Y = (Vars.screenHeight * 9) / 10;
                         }
@@ -509,6 +541,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         spriteBatch.Draw(enemy01, e.POSITION, enemyMode);
                     }
 
+                    spriteBatch.DrawString(gameFont, "Lives: " + p1.LIVESLEFT, new Vector2(0, 0), Color.White);
+                    spriteBatch.DrawString(gameFont, "Score: " + p1.SCORE, new Vector2(400, 0), Color.White);
+
 
                     break;
                 case "Pause":
@@ -518,6 +553,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 case "GameOver":
                     menu = new GameOverScreen();
                     spriteBatch.Draw(gameoverscreen, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+                    spriteBatch.DrawString(gameFont, "Score: " + prevscore, new Vector2(400, 400), Color.White);
+            spriteBatch.DrawString(gameFont, "High Score: " + highScore, new Vector2(400, 425), Color.White);
                     break;
             }
 

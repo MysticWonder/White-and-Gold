@@ -13,11 +13,14 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         // Attributes
         private string playerName;
         private int LivesLeft;
+        private int score;
 
         // Properties
         public String PLAYERNAME { get { return playerName; } }
 
         public int LIVESLEFT { get { return LivesLeft; } set { LivesLeft = value; } }
+
+        public int SCORE { get { return score; } set { score = value; } }
 
         // Constructor
         public Player(string name)
