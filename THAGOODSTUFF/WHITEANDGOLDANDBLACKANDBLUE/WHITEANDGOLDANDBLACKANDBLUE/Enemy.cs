@@ -32,8 +32,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         {
             position = pos;
             //alive = true;
-            health = Difficulty;
-            movementRand = RNG.Next(1, 8);
+            health = difficulty;
+            movementRand = RNG.Next(1, 9);
             switch (movementRand)
             {
                 case 1:
@@ -76,18 +76,25 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         {
             // Move the enemy
             // This needs to not be this simple. Movement straight down is boring
+            if (position.Y < 10)
+            {
+                position.Y++;
+            }
+
             switch (curmove)
             {
                 case MovementState.StraightDown:
                     position.Y++;
                     break;
                 case MovementState.HardLeft:
+                    
                     position.X--;
                     break;
                 case MovementState.HardRight:
+                    
                     position.X++;
                     break;
-                case MovementState.Pattern1: // In this pattern the enemy swoops to the left. Starting by moving directly down, and ending directly right
+                case MovementState.Pattern1: // In this pattern the enemy swoops to the right. Starting by moving directly down, and ending directly right
                     // decrement the timer
                     if (timer > 0)
                     {
@@ -125,7 +132,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         position.X += 3;
                     }
                     break;
-                case MovementState.Pattern2: // In this pattern the enemy swoops to the left. Starting by moving directly down, and ending directly right
+                case MovementState.Pattern2: // In this pattern the enemy swoops to the left. Starting by moving directly down, and ending directly left
                     // decrement the timer
                     if (timer > 0)
                     {
@@ -165,6 +172,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     break;
                 case MovementState.Idle: // a simple back and forth movement
                     // decrement the timer
+                   
+
                     if (timer > 0)
                     {
                         timer--;
@@ -192,6 +201,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     break;
                 case MovementState.Pattern3:
                     {
+                        
+
                         if (timer < 0)
                         {
                             timer = 1;
@@ -225,15 +236,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             FireCD--;
             if (FireCD <= 0)
             {
-                FireCD = 70;
                 Fire();
+                FireCD = 70;
             }
 
-            int modeSwitch = RNG.Next(0, 100);
-            if (modeSwitch >= 56 && modeSwitch <= 60)
-            {
-                this.mode = RNG.Next(0, 2);
-            }
         }
 
         private void Fire()
@@ -246,7 +252,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             {
                 if (BulletsAr[bulletcounter] == null)
                 {
-                    Bullet b1 = new Bullet(POSITION.X + (POSITION.Width / 2), POSITION.Y + POSITION.Height, 0, bulletcounter, 0, 0, 0);
+                    Bullet b1 = new Bullet(POSITION.X + (POSITION.Width / 2), POSITION.Y + POSITION.Height, 0, bulletcounter, 0, 0, mode);
                     BulletsAr[bulletcounter] = b1;
                     
                     break;

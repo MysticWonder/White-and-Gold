@@ -23,9 +23,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         public int ID { get { return idnum; } }
         public int FUSE { get { return fuse; } set { fuse = value; } }
         public int BULSTYLE { get { return bulstyle; } }
+        public int COLOR { get { return color; } }
         public int Alligience { get { return PorE; } }
 
-        public Bullet(int x, int y, int alligience, int id, int style, int bfuse, int color)
+        public Bullet(int x, int y, int alligience, int id, int style, int bfuse, int bcolor)
         {
             xpos = x;
             ypos = y;
@@ -33,7 +34,22 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             idnum = id;
             bulstyle = style;
             fuse = bfuse;
-            imagelocation = new Rectangle(x, y, 20, 20);
+
+            if (alligience == 1)
+            {
+                if (style == 1)
+                {
+
+                    imagelocation = new Rectangle(x, y, 20, 20);
+                }
+                else
+                imagelocation = new Rectangle(x, y, 10, 30);
+            }
+            else
+            {
+                imagelocation = new Rectangle(x, y, 20, 20);
+            }
+            color = bcolor;
 
         }
 
@@ -44,11 +60,29 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 case 0:
                     if (Alligience == 1)
                     {
-                        batch.Draw(BulletG, BULLETLOCATION, Color.LightGreen);
+                        if (color == 0) // blue
+                        {
+
+                            batch.Draw(BulletA0, BULLETLOCATION, Color.White);
+                        }
+                        else
+                        {
+
+                            batch.Draw(BulletA1, BULLETLOCATION, Color.White);
+                        }
                     }
                     else
                     {
-                        batch.Draw(BulletE, BULLETLOCATION, Color.Red);
+                        if (color == 0) // blue
+                        {
+
+                            batch.Draw(BulletE0, BULLETLOCATION, Color.White);
+                        }
+                        else
+                        {
+
+                            batch.Draw(BulletE1, BULLETLOCATION, Color.White);
+                        }
                     }
                 break;
                 case 1: // you need new textures for these. This will be a gernade

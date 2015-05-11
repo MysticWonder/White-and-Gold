@@ -23,7 +23,6 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         SpriteFont gameFont;
         Texture2D ship1;
         Texture2D ship2;
-        SpriteFont menuFont;
         KeyboardState keystate;
         MouseState mousestate;
         Stopwatch watch;
@@ -46,10 +45,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         // bullet attributes
         public static Bullet[] BulletsAr = new Bullet[200];
         int bulletcounter = 0;
-        int testcounter = 0;
         int BulletBuffer = 0;
-        public static Texture2D BulletE;
-        public static Texture2D BulletA;
+        public static Texture2D BulletE1;
+        public static Texture2D BulletA1;
+        public static Texture2D BulletE0;
+        public static Texture2D BulletA0;
         public static Texture2D BulletG;
         public static Texture2D Explosion;
         public static Texture2D Gernade;
@@ -60,16 +60,13 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         Texture2D enemy01;
         //list of enemies
         public static List<Enemy> enemies = new List<Enemy>();
-        
 
-        //spawn enemy #
-        int spawnE;
 
         // Variables for collisions
         Player p1 = new Player("P1");
 
         //Difficulty attributes and prop
-        public static int difficulty;
+        public static int difficulty = 0;
         public static int Difficulty { get { return difficulty; } set { difficulty = value; } }
 
         // score attributes
@@ -101,8 +98,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             menu = new TitleMenu();
 
 
-            ship1 = Content.Load<Texture2D>("Ship1");
-            ship2 = Content.Load<Texture2D>("Ship2");
+            ship1 = Content.Load<Texture2D>("Ship1.5");
+            ship2 = Content.Load<Texture2D>("Ship2.5");
 
             // initialize background rectangles
             backRect1 = new Rectangle(0, 0, 800, 700);
@@ -139,13 +136,15 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            titlescreen = Content.Load<Texture2D>("menuStart");
-            pausescreen = Content.Load<Texture2D>("menuPause");
+            titlescreen = Content.Load<Texture2D>("menuTitle");
+            pausescreen = Content.Load<Texture2D>("menuPaused");
             gameoverscreen = Content.Load<Texture2D>("menuGameOver");
             background = Content.Load<Texture2D>("SPAAAAACE");
             scrollin = Content.Load<Texture2D>("SPACE2");
-            BulletA = Content.Load<Texture2D>("BLET");
-            BulletE = Content.Load<Texture2D>("BLET");
+            BulletA0 = Content.Load<Texture2D>("PBulletBlue");
+            BulletA1 = Content.Load<Texture2D>("PBulletWhite");
+            BulletE0 = Content.Load<Texture2D>("EBulletBlack");
+            BulletE1 = Content.Load<Texture2D>("EBulletWhite");
             enemy01 = Content.Load<Texture2D>("NME2");
             BulletG = Content.Load<Texture2D>("BLET");
             Explosion = Content.Load<Texture2D>("bestexplosion");
@@ -260,7 +259,15 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     if (BulletBuffer == 0)
                     {
                         BulletBuffer = 20;
-                        AddBullet(1, 0, 0, 0);
+                        if (s1.MODE == 1)
+                        {
+
+                            AddBullet(1, 1, 0, 0);
+                        }
+                        if (s1.MODE == 0)
+                        {
+                            AddBullet(1, 0, 0, 0);
+                        }
                     }
                 }
 
@@ -346,7 +353,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     {
                         if (var.Alligience == 0)
                         {
-                            if (var.BULLETLOCATION.Intersects(s1.SHIPLOCATION))
+                            if (var.BULLETLOCATION.Intersects(s1.SHIPLOCATION) && var.COLOR != s1.MODE)
                             {
                                 RemoveBullet(var.ID);
                                 p1.LoseLife();
@@ -377,7 +384,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         {
                             foreach (Enemy evar in enemies)
                             {
-                                if (var.BULLETLOCATION.Intersects(evar.POSITION)&& s1.MODE == evar.MODE)
+                                if (var.BULLETLOCATION.Intersects(evar.POSITION)&& var.COLOR == evar.MODE)
                                 {
                                     switch (var.BULSTYLE)
                                     {
@@ -392,7 +399,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                                             evar.TakeHit();
                                             evar.TakeHit();
                                             break;
-                                           default: 
+                                        default: 
                                             RemoveBullet(var.ID);
                                             evar.TakeHit();
                                             p1.SCORE += 1000;
@@ -468,11 +475,10 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             int spawnEnemyRoll = RNG.Next(1,60);
             if (spawnEnemyRoll <= 2)
             {
-                if (BulletBuffer == 0)
+                if (menu.Type == "Game")
                 {
-                    BulletBuffer = 5;
-                    enemies.Add(new Enemy(new Rectangle(RNG.Next(1,600), -50, 75, 75)));
-                }
+                    enemies.Add(new Enemy(new Rectangle(RNG.Next(1, 600), -50, 75, 75)));
+                }              
             }
 
 
@@ -553,8 +559,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 case "GameOver":
                     menu = new GameOverScreen();
                     spriteBatch.Draw(gameoverscreen, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-                    spriteBatch.DrawString(gameFont, "Score: " + prevscore, new Vector2(400, 400), Color.White);
-            spriteBatch.DrawString(gameFont, "High Score: " + highScore, new Vector2(400, 425), Color.White);
+                    spriteBatch.DrawString(gameFont, "Score: " + prevscore, new Vector2(250, 400), Color.White);
+                    spriteBatch.DrawString(gameFont, "High Score: " + highScore, new Vector2(250, 425), Color.White);
                     break;
             }
 

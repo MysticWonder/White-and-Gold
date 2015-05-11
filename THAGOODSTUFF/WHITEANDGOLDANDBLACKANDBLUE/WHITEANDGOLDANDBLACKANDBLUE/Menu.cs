@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WHITEANDGOLDANDBLACKANDBLUE
 {
-     abstract class Menu
+    public abstract class Menu
     {
         protected string type;
         protected MouseState prev;

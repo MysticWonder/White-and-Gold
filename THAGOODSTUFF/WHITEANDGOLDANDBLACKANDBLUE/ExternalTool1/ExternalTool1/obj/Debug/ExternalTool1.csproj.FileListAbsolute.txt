@@ -15,3 +15,6 @@ D:\Users\Miguel\Documents\White-and-Gold2\THAGOODSTUFF\WHITEANDGOLDANDBLACKANDBL
 D:\Users\Miguel\Documents\White-and-Gold2\THAGOODSTUFF\WHITEANDGOLDANDBLACKANDBLUE\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.csproj.GenerateResource.Cache
 D:\Users\Miguel\Documents\White-and-Gold2\THAGOODSTUFF\WHITEANDGOLDANDBLACKANDBLUE\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.exe
 D:\Users\Miguel\Documents\White-and-Gold2\THAGOODSTUFF\WHITEANDGOLDANDBLACKANDBLUE\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.pdb
+D:\Users\Akw7657\Documents\White-and-Gold\THAGOODSTUFF\WHITEANDGOLDANDBLACKANDBLUE\ExternalTool1\ExternalTool1\bin\Debug\ExternalTool1.exe.config
+D:\Users\Akw7657\Documents\White-and-Gold\THAGOODSTUFF\WHITEANDGOLDANDBLACKANDBLUE\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.exe
+D:\Users\Akw7657\Documents\White-and-Gold\THAGOODSTUFF\WHITEANDGOLDANDBLACKANDBLUE\ExternalTool1\ExternalTool1\obj\Debug\ExternalTool1.pdb

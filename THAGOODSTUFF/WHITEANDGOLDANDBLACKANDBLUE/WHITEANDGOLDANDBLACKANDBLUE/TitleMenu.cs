@@ -45,7 +45,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             {
                 //set difficulty
                 diffFileReader = new StreamReader("gameDifficulty.txt");
-                diffFileContents = Console.ReadLine();
+                diffFileContents = diffFileReader.ReadLine();
                 switch (diffFileContents)
                 {
                     case "Easy":
