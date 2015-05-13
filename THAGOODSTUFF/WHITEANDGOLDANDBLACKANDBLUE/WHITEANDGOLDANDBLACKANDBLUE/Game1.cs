@@ -231,6 +231,18 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             //---------------------------------------------------------------------------------------------------------------------------
             //-----------------------------------------------------Input Methods---------------------------------------------------------
             //---------------------------------------------------------------------------------------------------------------------------
+            keystate = Keyboard.GetState();
+            
+            // This if statement is a failsafe
+            // If for some reason clicking the start button doesn't start the game
+            // you can press T on the title page to start the game
+            if (keystate.IsKeyDown(Keys.T))
+            {
+                menu.Type = "Game";
+                difficulty = 1;
+            }
+
+
 
             //if the screen is the game, allow ship to move on screen
             if (menu.Type == "Game")
@@ -238,7 +250,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 this.IsMouseVisible = false;
 
                 // get keystate
-                keystate = Keyboard.GetState();
+                
                 mousestate = Mouse.GetState();
                 mouseLocX = mousestate.X;
                 mouseLocY = mousestate.Y;
@@ -266,6 +278,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     KeyDirection = 3;
                     s1.Move(KeyDirection);
                 }
+                
 
                 
                 // process fire
@@ -306,18 +319,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     }
                 }
 
-                if (keystate.IsKeyDown(Keys.T))
-                {
-                    AddBullet(50, 50, 0, 0, 0, 0);
-                }
-                if (keystate.IsKeyDown(Keys.E))
-                {
-                    if (BulletBuffer == 0)
-                    {
-                        BulletBuffer = 5;
-                        enemies.Add(new Enemy(new Rectangle(300, -50, 50, 50)));
-                    }
-                }
+                
 
 
 

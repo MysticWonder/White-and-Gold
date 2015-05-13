@@ -12,17 +12,17 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 {
     public class Ship
     {
+        // Attributes
         private Player player;
-        private Bullet bullet;
         private int Mode = 0; // Default Mode, 1 is other mode
         private Rectangle shiplocation;
         private KeyboardState prevstate;
         private KeyboardState currentstate;
-        
+
+        // Properties
         public int X { get; set; }
         public int Y { get; set; }
 
-        // Properties
         public Player PLAYER { get { return player; } }
         public int MODE { get { return Mode; } set { Mode = value; } }
         public Rectangle SHIPLOCATION { get { return shiplocation; } }

@@ -10,6 +10,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 {
     public class Bullet : Game1
     {
+        // Attributes
         private int PorE; // 0 is enemy, 1 is player
         private int xpos;
         private int ypos;
@@ -17,8 +18,9 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         private int idnum;
         private int fuse;
         private int bulstyle;
-        private int color;
+        private int color; // 0 blue, 1 white
 
+        // Properties
         public Rectangle BULLETLOCATION { get { return imagelocation; } }
         public int ID { get { return idnum; } }
         public int FUSE { get { return fuse; } set { fuse = value; } }
@@ -26,6 +28,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         public int COLOR { get { return color; } }
         public int Alligience { get { return PorE; } }
 
+        // Constructor
         public Bullet(int x, int y, int alligience, int id, int style, int bfuse, int bcolor)
         {
             xpos = x;
@@ -35,6 +38,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             bulstyle = style;
             fuse = bfuse;
 
+            // Make the allied bullets ovel shaped, make the enemy bullets circular
             if (alligience == 1)
             {
                 if (style == 1)
@@ -53,6 +57,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
         }
 
+        // Draw every single bullet
        public void BulletDraw(Bullet b1, SpriteBatch batch)
         {
             switch (bulstyle)
@@ -65,7 +70,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
                             batch.Draw(BulletA0, BULLETLOCATION, Color.White);
                         }
-                        else
+                        else // white
                         {
 
                             batch.Draw(BulletA1, BULLETLOCATION, Color.White);
@@ -78,14 +83,14 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
                             batch.Draw(BulletE0, BULLETLOCATION, Color.White);
                         }
-                        else
+                        else // white
                         {
 
                             batch.Draw(BulletE1, BULLETLOCATION, Color.White);
                         }
                     }
                 break;
-                case 1: // you need new textures for these. This will be a gernade
+                case 1: // Gernade
                     if (Alligience == 1)
                     {
                         batch.Draw(Gernade, BULLETLOCATION, Color.LightGreen);
@@ -105,10 +110,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             
         }
 
-
+        // Depending on the style of the bullet
+        // move the bullet
         public void BulletMove()
         {
-            if (bulstyle == 0)
+            if (bulstyle == 0) // The default bullet
             {
                 if (PorE == 0)
                 {
@@ -119,7 +125,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     imagelocation.Y -= 5;
                 }
             }
-            if (bulstyle == 1)
+            if (bulstyle == 1) // Gernade P1
             {
                 if (PorE == 1)
                 {
@@ -136,7 +142,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                     }
                 }
             }
-            if (bulstyle == 2)
+            if (bulstyle == 2) // Geernade P2
             {
                 fuse--;
                 if (fuse <= 0)

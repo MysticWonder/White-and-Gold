@@ -18,7 +18,6 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         enum MovementState { StraightDown, HardLeft, HardRight, Pattern1, Pattern2, Pattern3, Pattern4, Idle};
         MovementState curmove;
         private Rectangle position;
-        //private Boolean alive; // This isn't even necissary - remove it
         private int health;
         private int FireCD;
         private int timer; // for patterns of movement
@@ -75,7 +74,6 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         public void Update()
         {
             // Move the enemy
-            // This needs to not be this simple. Movement straight down is boring
             if (position.Y < 10)
             {
                 position.Y++;
@@ -242,6 +240,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
         }
 
+        // Create a bullet
         private void Fire()
         {
             
@@ -264,6 +263,7 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             
         }
 
+        // Decrement health
         public void TakeHit()
         {
             health--;
