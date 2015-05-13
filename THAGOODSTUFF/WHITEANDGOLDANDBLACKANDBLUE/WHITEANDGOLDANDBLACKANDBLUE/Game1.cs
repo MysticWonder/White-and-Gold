@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 //using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Audio;
 using System.IO;
 #endregion
 
@@ -75,6 +76,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
         Scores scoreRead;
         int highScore;
 
+        //sound!!
+        public static SoundEffect pew, muzak;
+        public static SoundEffectInstance pewInstance, muzakInstance;
+        public static bool muzakStarted;
+
 
         public Game1()
             : base()
@@ -124,7 +130,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             // initialize the scorekeeping object
             scoreRead = new Scores();
 
-
+            //muzak hasnt started
+            muzakStarted = false;
             base.Initialize();
         }
 
@@ -150,6 +157,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             Explosion = Content.Load<Texture2D>("bestexplosion");
             Gernade = Content.Load<Texture2D>("Gernade");
             gameFont = Content.Load<SpriteFont>("Font1");
+            muzak = Content.Load<SoundEffect>("Muzak");
+            pew = Content.Load<SoundEffect>("Pew2");
             
             // TODO: use this.Content to load your game content here
         }
@@ -173,6 +182,14 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            //Muzak
+            if (muzakStarted == false)
+            {
+                muzakInstance = muzak.CreateInstance();
+                muzakInstance.IsLooped = true;
+                muzakInstance.Play();
+                muzakStarted = true;
+            }
             // TODO: Add your update logic here
 
             //---------------------------------------------------------------------------------------------------------------------------
@@ -261,11 +278,18 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         BulletBuffer = 20;
                         if (s1.MODE == 1)
                         {
-
+                            pewInstance = pew.CreateInstance();
+                            pewInstance.Volume = .5f;
+                            pewInstance.Pitch = -.5f;
+                            pewInstance.Play();
                             AddBullet(1, 1, 0, 0);
                         }
                         if (s1.MODE == 0)
                         {
+                            pewInstance = pew.CreateInstance();
+                            pewInstance.Volume = .5f;
+                            pewInstance.Pitch = -.5f;
+                            pewInstance.Play();
                             AddBullet(1, 0, 0, 0);
                         }
                     }
@@ -302,41 +326,41 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 //---------------------------------------------------------------------------------------------------------------------------
 
                 // For every bullet in the BulletsAr array, we need to update thier position (cause they're moving)
-                foreach (Bullet var in BulletsAr)
+                for (int i = 0; i < BulletsAr.Length; i++)
                 {
-                    if (var != null)
+                    if (BulletsAr[i] != null)
                     {
-                        var.BulletMove();
+                        BulletsAr[i].BulletMove();
 
-                        if (var.BULLETLOCATION.Y < 0 || var.BULLETLOCATION.Y > 1000)
+                        if (BulletsAr[i].BULLETLOCATION.Y < 0 || BulletsAr[i].BULLETLOCATION.Y > 1000)
                         {
-                            RemoveBullet(var.ID);
+                            RemoveBullet(BulletsAr[i].ID);
                         }
                     }
                 }
 
                 //Update Enemy Movement
-                foreach (Enemy e in enemies)
+                for (int i = 0; i < enemies.Count; i++)
                 {
-                    e.Update();
+                    enemies[i].Update();
                 }
                
 
                 //enemy despawn at bottom
                 if (enemies.Count != 0)
                 {
-                    foreach (Enemy e in enemies.ToArray())
+                    for (int i = 0; i < enemies.Count; i++)
                     {
-                        if (e.HEALTH <= 0)
+                        if (enemies[i].HEALTH <= 0)
                         {
-                            enemies.Remove(e);
-                            break;
+                            enemies.Remove(enemies[i]);
+                            continue;
                         }
 
-                        if (e.POSITION.Y > 1000)
+                        if (enemies[i].POSITION.Y > 1000)
                         {
-                            enemies.Remove(e);
-                            break;
+                            enemies.Remove(enemies[i]);
+                            continue;
                         }
                     }
                 }
@@ -347,70 +371,79 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
 
 
                 // for each bullet, check the collision to see if an enemy is hit or a player is hit
-                foreach (Bullet var in BulletsAr)
+                if (BulletsAr.Length != 0)
                 {
-                    if (var != null)
+                    for (int i = 0; i < BulletsAr.Length; i++)
                     {
-                        if (var.Alligience == 0)
+                        if (BulletsAr[i] != null)
                         {
-                            if (var.BULLETLOCATION.Intersects(s1.SHIPLOCATION) && var.COLOR != s1.MODE)
+                            if (BulletsAr[i].Alligience == 0)
                             {
-                                RemoveBullet(var.ID);
-                                p1.LoseLife();
-
-                                if (p1.LostGame())
+                                if (BulletsAr[i].BULLETLOCATION.Intersects(s1.SHIPLOCATION) && BulletsAr[i].COLOR != s1.MODE)
                                 {
-                                    menu.Type = "GameOver";
-                                    enemies.Clear();
-                                    foreach (Bullet bul in BulletsAr)
+                                    RemoveBullet(BulletsAr[i].ID);
+                                    p1.LoseLife();
+
+                                    if (p1.LostGame())
                                     {
-                                        if (bul != null)
+                                        menu.Type = "GameOver";
+                                        enemies.Clear();
+                                        for (int b = 0; b < BulletsAr.Length; b++)
                                         {
-                                            RemoveBullet(bul.ID);
+                                            if (BulletsAr[b] != null)
+                                            {
+                                                RemoveBullet(BulletsAr[b].ID);
+                                            }
                                         }
+                                        p1.LIVESLEFT = 3;
+                                        watch.Reset();
+                                        highScore = scoreRead.WriteScore(p1.SCORE);
+                                        prevscore = p1.SCORE;
+                                        p1.SCORE = 0;
+                                        s1.X = Vars.screenWidth / 2;
+                                        s1.Y = (Vars.screenHeight * 9) / 10;
                                     }
-                                    p1.LIVESLEFT = 3;
-                                    watch.Reset();
-                                    highScore = scoreRead.WriteScore(p1.SCORE);
-                                    prevscore = p1.SCORE;
-                                    p1.SCORE = 0;
-                                    s1.X = Vars.screenWidth / 2;
-                                    s1.Y = (Vars.screenHeight * 9) / 10;
                                 }
                             }
-                        }
-
-                        if (var.Alligience == 1)
-                        {
-                            foreach (Enemy evar in enemies)
+                            if (BulletsAr[i] != null)
                             {
-                                if (var.BULLETLOCATION.Intersects(evar.POSITION)&& var.COLOR == evar.MODE)
+                                if (BulletsAr[i].Alligience == 1)
                                 {
-                                    switch (var.BULSTYLE)
+                                    for (int e = 0; e < enemies.Count; e++)
                                     {
-                                        case 1:
-                                            var.FUSE = 0;
-                                            evar.TakeHit();
-                                            evar.TakeHit();
-                                            evar.TakeHit();
-                                            break;
-                                        case 2:
-                                            evar.TakeHit();
-                                            evar.TakeHit();
-                                            evar.TakeHit();
-                                            break;
-                                        default: 
-                                            RemoveBullet(var.ID);
-                                            evar.TakeHit();
-                                            p1.SCORE += 1000;
-                                            break;
-                                    }
+                                        if (enemies[e] != null && enemies[e].POSITION != null && BulletsAr[i] != null)
+                                        {
+                                            if (BulletsAr[i].BULLETLOCATION.Intersects(enemies[e].POSITION) && BulletsAr[i].COLOR == enemies[e].MODE)
+                                            {
+                                                switch (BulletsAr[i].BULSTYLE)
+                                                {
+                                                    case 1:
+                                                        BulletsAr[i].FUSE = 0;
+                                                        enemies[e].TakeHit();
+                                                        enemies[e].TakeHit();
+                                                        enemies[e].TakeHit();
+                                                        break;
+                                                    case 2:
+                                                        enemies[e].TakeHit();
+                                                        enemies[e].TakeHit();
+                                                        enemies[e].TakeHit();
+                                                        break;
+                                                    default:
+                                                        RemoveBullet(BulletsAr[i].ID);
+                                                        enemies[e].TakeHit();
+                                                        p1.SCORE += 1000;
+                                                        break;
+                                                }
 
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                //END LOOP
 
                 foreach (Enemy e in enemies.ToArray())
                 {
@@ -424,11 +457,11 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                         {
                             menu.Type = "GameOver";
                             enemies.Clear();
-                            foreach (Bullet bul in BulletsAr)
+                            for (int i = 0; i < BulletsAr.Length; i++)
                             {
-                                if (bul != null)
+                                if (BulletsAr[i] != null)
                                 {
-                                    RemoveBullet(bul.ID);
+                                    RemoveBullet(BulletsAr[i].ID);
                                 }
                             }
                             p1.LIVESLEFT = 3;

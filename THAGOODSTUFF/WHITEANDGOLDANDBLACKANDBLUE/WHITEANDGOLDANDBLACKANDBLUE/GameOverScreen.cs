@@ -26,6 +26,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 current.Position.X >= 290 && current.Position.X <= 510 &&
                 current.Position.Y >= 160 && current.Position.Y <= 240)
             {
+                Game1.muzakInstance.Stop();
+                Game1.muzakStarted = false;
                 type = "Game";
             }
 
@@ -33,6 +35,8 @@ namespace WHITEANDGOLDANDBLACKANDBLUE
                 current.Position.X >= 290 && current.Position.X <= 510 &&
                 current.Position.Y >= 280 && current.Position.Y <= 380)
             {
+                Game1.muzakInstance.Stop();
+                Game1.muzakStarted = false;
                 type = "Title";
             }
             current = prev;
